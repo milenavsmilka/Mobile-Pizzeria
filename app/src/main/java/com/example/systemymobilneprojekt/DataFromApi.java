@@ -1,0 +1,76 @@
+package com.example.systemymobilneprojekt;
+
+import android.os.AsyncTask;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+class DataFromApi extends AsyncTask {
+
+    private Exception exception;
+
+    @Override
+    protected Object doInBackground(Object... objects) {
+        /*
+        try {
+        URL url = new URL("https://api.open-meteo.com/v1/forecast?latitude=53.13&longitude=23.16&hourly=surface_pressure,temperature_2m");
+        HttpURLConnection conn = null;
+
+            conn = (HttpURLConnection) url.openConnection();
+
+        conn.setRequestMethod("GET");
+        conn.connect();
+        if (conn.getResponseCode() == 200) {
+            Scanner scan = new Scanner(url.openStream());
+            while (scan.hasNext()) {
+                String temp = scan.nextLine();
+                Log.d("NaszeLogi", "datafromapi: "+temp);
+                //parse json here
+
+
+            }
+        }
+        else
+        {
+            Log.d("NaszeLogi", "wrongresponse: "+conn.getResponseCode());
+        }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+        */
+        try {
+            URL url = new URL("http://api.weatherapi.com/v1/current.json?key=50bc46cbc9b1482fa7004917232101 &q=Warsaw&aqi=no");
+                    URLConnection request = url.openConnection();
+            Log.d("NaszeLogi", "data fetch connection established");
+            request.setRequestProperty("Content-Type", "application/json; utf-8");
+
+            BufferedReader input = new BufferedReader(new InputStreamReader(url.openStream()));
+            JSONObject hourlyObject = new JSONObject(input.readLine()).getJSONObject("current");
+            Double pressure = hourlyObject.getDouble("pressure_mb");
+            Double temperature = hourlyObject.getDouble("temp_c");
+            Log.d("NaszeLogi", "datafromapi: "+ pressure + "hPa " + temperature + " Celsius");
+            ArrayList<Double> list = new ArrayList<>();
+            list.add(pressure);
+            list.add(temperature);
+            return list;
+
+        } catch (IOException | JSONException e) {
+            Log.d("NaszeLogi", "data from api didnt load: "+ e);
+            e.printStackTrace();
+        }
+        return null;
+    }
+}
