@@ -1,4 +1,4 @@
-package com.example.systemymobilneprojekt.db;
+package com.example.systemymobilneprojekt.db.tables;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -9,11 +9,9 @@ import java.math.BigDecimal;
 @Entity
 public class APIData {
     @PrimaryKey(autoGenerate = true)
-    public int uid;
+    public int apiDataId;
     @ColumnInfo(name = "temperature")
-    public Float temperature;
+    public BigDecimal temperature;
     @ColumnInfo(name = "pressure")
-    public Float pressure;
-    @ColumnInfo(name = "menuId")
-    public int menuId;
+    public BigDecimal pressure;
 }

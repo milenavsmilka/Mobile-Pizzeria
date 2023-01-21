@@ -5,8 +5,22 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
-@Database(entities = {Client.class, Order.class,Pizza.class,Menu.class,APIData.class},version = 2, exportSchema = true)
+import com.example.systemymobilneprojekt.db.dao.APIDataDao;
+import com.example.systemymobilneprojekt.db.dao.ClientDao;
+import com.example.systemymobilneprojekt.db.dao.MenuDao;
+import com.example.systemymobilneprojekt.db.dao.OrderDao;
+import com.example.systemymobilneprojekt.db.dao.PizzaDao;
+import com.example.systemymobilneprojekt.db.tables.APIData;
+import com.example.systemymobilneprojekt.db.tables.Client;
+import com.example.systemymobilneprojekt.db.tables.Menu;
+import com.example.systemymobilneprojekt.db.tables.Order;
+import com.example.systemymobilneprojekt.db.tables.Pizza;
+
+@Database(entities = {Client.class, Order.class, Pizza.class, Menu.class, APIData.class},
+        version = 2, exportSchema = true)
+@TypeConverters({Converters.class})
 public abstract class PizzeriaDatabase extends RoomDatabase {
 
     public abstract ClientDao clientDao();

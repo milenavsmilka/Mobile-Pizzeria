@@ -2,6 +2,12 @@ package com.example.systemymobilneprojekt.db;
 
 import android.content.Context;
 
+import androidx.room.Room;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+
+import com.example.systemymobilneprojekt.db.tables.Client;
+
 import java.util.List;
 
 public class DatabaseOperations {
@@ -20,5 +26,16 @@ public class DatabaseOperations {
         PizzeriaDatabase db  = PizzeriaDatabase.resetInstance(context);
         //TODO getInstance
         return db.clientDao().getAllClient();
+    }
+
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE client RENAME COLUMN user TO username");
+        }
+    };
+    public void migrateDatabaseAlterTable(Context context){
+        Room.databaseBuilder(context, PizzeriaDatabase.class, "pizzeriadatabase")
+                .addMigrations(MIGRATION_1_2).build();
     }
 }

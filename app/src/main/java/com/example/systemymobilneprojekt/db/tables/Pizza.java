@@ -1,4 +1,4 @@
-package com.example.systemymobilneprojekt.db;
+package com.example.systemymobilneprojekt.db.tables;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -10,13 +10,11 @@ import java.util.List;
 @Entity
 public class Pizza {
     @PrimaryKey(autoGenerate = true)
-    public int uid;
+    public int pizzaId;
     @ColumnInfo(name = "name")
     public String name;
     @ColumnInfo(name = "price")
     public String price;
-    @ColumnInfo(name = "dip")
-    public String dip;
     @ColumnInfo(name = "description")
     public String description;
 }
