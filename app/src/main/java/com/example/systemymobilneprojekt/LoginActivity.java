@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.systemymobilneprojekt.app.TaskListActivity;
 /*
 public class MainActivity extends AppCompatActivity {
     EditText username = (EditText)findViewById(R.id.usernameInput);
@@ -80,6 +82,8 @@ public class LoginActivity extends Activity {
                         !passwordEditText.getText().toString().equals("")) {
                     //tu jest logowanie
                     sendLoginNotification();
+                    Intent goMenuIntent = new Intent(LoginActivity.this, TaskListActivity.class);
+                    startActivity(goMenuIntent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Nie podano danych", Toast.LENGTH_SHORT).show();
                 }
