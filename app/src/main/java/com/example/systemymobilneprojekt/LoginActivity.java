@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.systemymobilneprojekt.app.TaskListActivity;
+import com.example.systemymobilneprojekt.db.DatabaseOperations;
 /*
 public class MainActivity extends AppCompatActivity {
     EditText username = (EditText)findViewById(R.id.usernameInput);
@@ -62,7 +63,6 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("Witaj w pizzerii!", "Witaj w pizzerii!", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = getSystemService(NotificationManager.class);

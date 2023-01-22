@@ -83,7 +83,7 @@ public class TaskListFragment extends Fragment {
 
             nameTextView.setText(task.getName());
 
-            dateTextView.setText(task.getDate().toString());
+            dateTextView.setText(task.getDescription());
 
             if (task.getCategory().equals(Category.CAPRICIOSA)) {
                 iconImageView.setImageResource(R.drawable.ic_home);

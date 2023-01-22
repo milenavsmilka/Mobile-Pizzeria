@@ -9,6 +9,7 @@ public class Task {
     private String name;
     private Date date;
     private boolean done;
+    private String description;
 
     private Category category;
 
@@ -39,6 +40,10 @@ public class Task {
         return date;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public boolean isDone() {
         return done;
     }
@@ -49,6 +54,10 @@ public class Task {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setDate(Date date) {

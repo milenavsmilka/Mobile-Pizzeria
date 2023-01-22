@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -14,7 +15,7 @@ public class Pizza {
     @ColumnInfo(name = "name")
     public String name;
     @ColumnInfo(name = "price")
-    public String price;
+    public BigDecimal price;
     @ColumnInfo(name = "description")
     public String description;
 }

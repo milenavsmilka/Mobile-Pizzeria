@@ -1,7 +1,12 @@
 package com.example.systemymobilneprojekt.app;
 
+import android.provider.ContactsContract;
+import android.util.Log;
+
 import com.example.systemymobilneprojekt.app.Category;
 import com.example.systemymobilneprojekt.app.Task;
+import com.example.systemymobilneprojekt.db.DatabaseOperations;
+import com.example.systemymobilneprojekt.db.tables.Pizza;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +19,12 @@ public class TaskStorage {
 
     private TaskStorage() {
         tasks = new ArrayList<>();
-        for (int i = 1; i <= 10; i++) {
+        List<Pizza> pizzas = DatabaseOperations.getAllPizzas();
+        for (int i = 0; i < pizzas.size(); i++) {
+            Log.d("NaszeLogi","pizza nr: "+i+" "+pizzas.get(i));
             Task task = new Task();
-            task.setName("Pizza " + i);
+            task.setName(pizzas.get(i).name);
+            task.setDescription(pizzas.get(i).description);
             task.setDone(i % 3 == 0);
 
             if (i % 3 == 0) {
