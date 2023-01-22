@@ -17,11 +17,15 @@ import java.util.List;
 public class DatabaseOperations {
 
 
-    public  void saveNewClient(String username, String password) {
+    public static List<Client> getALlClients() {
+        return null;
+    }
+
+    public static void addClientToDb() {
+    }
+
+    public static void saveNewClient(Client client) {
         PizzeriaDatabase db  = PizzeriaDatabase.getInstance();
-        Client client = new Client();
-        client.username = username;
-        client.password = password;
         client.promotionPizzaId=-1;
         db.clientDao().insertClient(client);
     }

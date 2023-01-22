@@ -9,8 +9,6 @@ public class TaskListActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        PizzeriaDatabase.setInstance(this.getApplicationContext());
-        //DatabaseOperations.addPizzasToDb();
         return new TaskListFragment();
     }
 }
