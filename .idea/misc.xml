@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/zibi-/AndroidStudioProjects/Systemymobilneprojekt/app/src/main/res/drawable/abc.xml" value="0.1475" />
-        <entry key="..\:/Users/zibi-/AndroidStudioProjects/Systemymobilneprojekt/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/milen/Desktop/praca/systemymobilneprojekt/app/src/main/res/drawable-v24/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/milen/Desktop/praca/systemymobilneprojekt/app/src/main/res/layout/activity_main.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/milen/Desktop/praca/systemymobilneprojekt/app/src/main/res/layout/fragment_task.xml" value="0.1" />
+        <entry key="..\:/Users/milen/Desktop/praca/systemymobilneprojekt/app/src/main/res/menu/fragment_task_menu.xml" value="0.1" />
+        <entry key="..\:/Users/zibi-/AndroidStudioProjects/Systemymobilneprojekt/app/src/main/res/layout/activity_main.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/zibi-/AndroidStudioProjects/Systemymobilneprojekt/app/src/main/res/xml/network_security_config.xml" value="0.10208333333333333" />
       </map>
     </option>

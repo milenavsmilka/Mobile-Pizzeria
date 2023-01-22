@@ -1,4 +1,16 @@
 <resources>
-    <string name="app_name">Systemy mobilne projekt</string>
-    <string name="Login" />
+    <string name="app_name">Menu</string>
+
+    <string name="name_hint">Wprowadź nazwę zadania</string>
+    <string name="name_label">Nazwa</string>
+    <string name="details_label">Szczegóły</string>
+    <string name="done_label">Wykonane</string>
+    <string name="task_add_new">Nowe zadanie</string>
+    <string name="show_subtitle">Pokaż Koszyk</string>
+    <string name="hide_subtitle">Ukryj Koszyk</string>
+    <string name="subtitle_format">%1$d produkty w koszyku</string>
+    <string name="subtitle_format_many">%1$d produktów w koszyku</string>
+    <string name="subtitle_format_one">%1$d produkt w koszyku</string>
+
+    <string name="Login" >Login</string>
 </resources>
