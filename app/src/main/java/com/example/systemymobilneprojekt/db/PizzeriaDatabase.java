@@ -31,7 +31,11 @@ public abstract class PizzeriaDatabase extends RoomDatabase {
 
     private static PizzeriaDatabase INSTANCE;
 
-    public static PizzeriaDatabase getInstance(Context context) {
+    public static PizzeriaDatabase getInstance() {
+        return INSTANCE;
+    }
+
+    public static PizzeriaDatabase setInstance(Context context) {
         if(INSTANCE == null) INSTANCE = Room.databaseBuilder(context.getApplicationContext(), PizzeriaDatabase.class, "DB_TRAINLY").allowMainThreadQueries().build();
 
         return INSTANCE;
