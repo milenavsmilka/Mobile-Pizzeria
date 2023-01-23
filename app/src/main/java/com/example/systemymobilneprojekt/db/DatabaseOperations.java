@@ -30,6 +30,11 @@ public class DatabaseOperations {
         db.clientDao().insertClient(client);
     }
 
+    public static Client getCertainClient(String username, String password) {
+        PizzeriaDatabase db  = PizzeriaDatabase.getInstance();
+        return db.clientDao().getCertainClient(username,password);
+    }
+
     public List<Client> getAllClients() {
         PizzeriaDatabase db  = PizzeriaDatabase.getInstance();
         return db.clientDao().getAllClient();

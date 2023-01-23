@@ -94,7 +94,8 @@ public class LoginActivity extends Activity {
                     List<Client> clients = DatabaseOperations.getALlClients();
                     boolean alreadyInDB=false;
                     sendLoginNotification();
-                    Intent goMenuIntent = new Intent(LoginActivity.this, TaskListActivity.class);
+
+                    Client user;
                     if(clients!=null)
                     {
                         for (Client client: clients){
@@ -105,12 +106,15 @@ public class LoginActivity extends Activity {
                         }
                     }
                     if(!alreadyInDB){
-                        Client client = new Client();
-                        client.username=username;
-                        client.password=password;
-                        DatabaseOperations.saveNewClient(client);
+                        user = new Client();
+                        user.username=username;
+                        user.password=password;
+                        DatabaseOperations.saveNewClient(user);
                     }
-                    Log.d("NaszeLogi","Zalogowano na: "+username);
+                    Log.d("NaszeLogi","Zalogowano na: "+username + " " + password);
+                    Intent goMenuIntent = new Intent(LoginActivity.this, TaskListActivity.class);
+                    goMenuIntent.putExtra("username",username);
+                    goMenuIntent.putExtra("password",password);
                     startActivity(goMenuIntent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Nie podano danych", Toast.LENGTH_SHORT).show();

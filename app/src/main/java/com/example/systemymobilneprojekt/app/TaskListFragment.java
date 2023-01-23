@@ -3,6 +3,7 @@ package com.example.systemymobilneprojekt.app;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,12 +31,16 @@ public class TaskListFragment extends Fragment {
     private TaskAdapter adapter = null;
     private boolean subtitleVisible;
     public static final String KEY_SUBTITLE = "subtitle";
-
+    private String username;
+    private String password;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
+        Intent myIntent = getActivity().getIntent();
+        username = myIntent.getExtras().getString("username");
+        password = myIntent.getExtras().getString("password");
+        Log.d("NaszeLogi","received: " + username+" " + password);
         if( savedInstanceState != null){
             subtitleVisible = savedInstanceState.getBoolean(KEY_SUBTITLE);
         }
