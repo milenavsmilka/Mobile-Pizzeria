@@ -25,7 +25,6 @@ public class TaskStorage {
             Task task = new Task();
             task.setName(pizzas.get(i).name);
             task.setDescription(pizzas.get(i).description);
-            task.setDone(i % 3 == 0);
 
             if (i % 3 == 0) {
                 task.setCategory(Category.MIENSA);

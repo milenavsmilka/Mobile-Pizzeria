@@ -12,4 +12,11 @@
     <string name="subtitle_format_many">%1$d tasks</string>
     <string name="subtitle_format_one">%1$d task</string>
     <string name="Login">Login</string>
+    <string name="order_label">Order</string>
+    <string name="sum_label">Sum</string>
+    <string name="name_pizzas">List of pizzas</string>
+    <string name="sum_total">To pay</string>
+    <string name="address_label">Write your address</string>
+    <string name="write_address">Your address</string>
+    <string name="click_order">Order</string>
 </resources>

@@ -21,6 +21,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.systemymobilneprojekt.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -30,24 +32,34 @@ public class TaskListFragment extends Fragment {
     private TaskAdapter adapter = null;
     private boolean subtitleVisible;
     public static final String KEY_SUBTITLE = "subtitle";
+    private FloatingActionButton shoppingBasket;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
 
-        if( savedInstanceState != null){
+        if (savedInstanceState != null) {
             subtitleVisible = savedInstanceState.getBoolean(KEY_SUBTITLE);
         }
+
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_task_list, container, false);
+        View view = inflater.inflate(R.layout.button_main, container, false);
         recyclerView = view.findViewById(R.id.task_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        shoppingBasket= (FloatingActionButton) view.findViewById(R.id.fab);
+        shoppingBasket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent gotoBasket = new Intent(getActivity(),ShoppingBasketActivity.class);
+                startActivity(gotoBasket);
+            }
+        });
 
         updateView();
         return view;
@@ -135,9 +147,9 @@ public class TaskListFragment extends Fragment {
             TextView nameTextView = holder.getTextView();
 
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                    tasks.get(holder.getAdapterPosition()).setDone(isChecked);
-                    updateSubtitle();
-                }
+                        tasks.get(holder.getAdapterPosition()).setDone(isChecked);
+                        updateSubtitle();
+                    }
             );
         }
 
@@ -147,26 +159,25 @@ public class TaskListFragment extends Fragment {
         }
     }
 
-    public void updateSubtitle(){
+    public void updateSubtitle() {
         TaskStorage taskStorage = TaskStorage.getInstance();
         List<Task> tasks = taskStorage.getTasks();
         int toDoTasksCount = 0;
-        for(Task task:tasks){
-            if(task.isDone()){
+        for (Task task : tasks) {
+            if (task.isDone()) {
                 toDoTasksCount++;
             }
         }
         String subtitle;
-        if(toDoTasksCount%10>4  || toDoTasksCount%10 == 0){
-            subtitle = getString(R.string.subtitle_format_many,toDoTasksCount);
-        } else if(toDoTasksCount%10 == 1){
-            subtitle = getString(R.string.subtitle_format_one,toDoTasksCount);
-        }
-        else {
-            subtitle = getString(R.string.subtitle_format,toDoTasksCount);
+        if (toDoTasksCount % 10 > 4 || toDoTasksCount % 10 == 0) {
+            subtitle = getString(R.string.subtitle_format_many, toDoTasksCount);
+        } else if (toDoTasksCount % 10 == 1) {
+            subtitle = getString(R.string.subtitle_format_one, toDoTasksCount);
+        } else {
+            subtitle = getString(R.string.subtitle_format, toDoTasksCount);
         }
 
-        if(!subtitleVisible){
+        if (!subtitleVisible) {
             subtitle = null;
         }
         AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
@@ -186,9 +197,9 @@ public class TaskListFragment extends Fragment {
         inflater.inflate(R.menu.fragment_task_menu, menu);
 
         MenuItem subtitleItem = menu.findItem(R.id.show_subtitle);
-        if(subtitleVisible){
+        if (subtitleVisible) {
             subtitleItem.setTitle(R.string.hide_subtitle);
-        }else {
+        } else {
             subtitleItem.setTitle(R.string.show_subtitle);
         }
     }
