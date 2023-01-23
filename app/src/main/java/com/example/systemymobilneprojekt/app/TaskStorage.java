@@ -24,7 +24,7 @@ public class TaskStorage {
             task.setDescription(pizzas.get(i).description);
 
             if (i % 3 == 0) {
-                task.setCategory(Category.MIENSA);
+                task.setCategory(Category.SEROWY);
             } else {
                 task.setCategory(Category.POMIDOROWY);
             }

@@ -18,6 +18,7 @@
     <string name="address_label">Wpisz adres</string>
     <string name="write_address">Twój adres</string>
     <string name="click_order">Zamów</string>
+    <string name="thank_you">Dziękujemy!</string>
 
     <string name="Login" >Login</string>
 </resources>
