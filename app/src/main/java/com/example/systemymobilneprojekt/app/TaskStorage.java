@@ -25,7 +25,7 @@ public class TaskStorage {
             Task task = new Task();
             task.setName(pizzas.get(i).name);
             task.setDescription(pizzas.get(i).description);
-
+            task.setPrice(pizzas.get(i).price);
             if (i % 3 == 0) {
                 task.setCategory(Category.MIENSA);
             } else {

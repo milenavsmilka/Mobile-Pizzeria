@@ -81,6 +81,7 @@ public class TaskListFragment extends Fragment {
         private final TextView nameTextView;
         private final TextView dateTextView;
         private ImageView iconImageView;
+        private final TextView priceTextView;
 
         CheckBox doneCheckBoxCateg;
 
@@ -93,6 +94,8 @@ public class TaskListFragment extends Fragment {
             doneCheckBoxCateg = itemView.findViewById(R.id.task_done_categ);
             iconImageView = itemView.findViewById(R.id.task_img);
 
+            priceTextView = itemView.findViewById(R.id.pizzaPrice);
+
         }
 
         public void bind(Task task) {
@@ -101,6 +104,8 @@ public class TaskListFragment extends Fragment {
             nameTextView.setText(task.getName());
 
             dateTextView.setText(task.getDescription());
+
+            priceTextView.setText(task.getPrice().toString());
 
             if (task.getCategory().equals(Category.CAPRICIOSA)) {
                 iconImageView.setImageResource(R.drawable.ic_home);

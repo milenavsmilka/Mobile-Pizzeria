@@ -1,5 +1,6 @@
 package com.example.systemymobilneprojekt.app;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
@@ -10,13 +11,22 @@ public class Task {
     private Date date;
     private boolean done;
     private String description;
-
+    private BigDecimal price;
     private Category category;
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
     public Task(){
         id = UUID.randomUUID();
         date = new Date();
         category = Category.CAPRICIOSA;
+
     }
 
     public Category getCategory() {
