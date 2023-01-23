@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.systemymobilneprojekt.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -102,7 +101,7 @@ public class TaskListFragment extends Fragment {
 
             dateTextView.setText(task.getDescription());
 
-            if (task.getCategory().equals(Category.CAPRICIOSA)) {
+            if (task.getCategory().equals(Category.POMIDOROWY)) {
                 iconImageView.setImageResource(R.drawable.ic_home);
             } else {
                 iconImageView.setImageResource(R.drawable.ic_studies);

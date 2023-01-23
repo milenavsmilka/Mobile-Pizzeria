@@ -16,7 +16,7 @@ public class Task {
     public Task(){
         id = UUID.randomUUID();
         date = new Date();
-        category = Category.CAPRICIOSA;
+        category = Category.POMIDOROWY;
     }
 
     public Category getCategory() {
