@@ -2,6 +2,8 @@ package com.example.systemymobilneprojekt.app;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,9 +24,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.systemymobilneprojekt.R;
+import com.example.systemymobilneprojekt.db.DatabaseOperations;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TaskListFragment extends Fragment {
@@ -104,14 +110,26 @@ public class TaskListFragment extends Fragment {
             nameTextView.setText(task.getName());
 
             dateTextView.setText(task.getDescription());
-
             priceTextView.setText(task.getPrice().toString());
 
-            if (task.getCategory().equals(Category.CAPRICIOSA)) {
-                iconImageView.setImageResource(R.drawable.ic_home);
-            } else {
-                iconImageView.setImageResource(R.drawable.ic_studies);
+            List<String> pizzaImageNames= Arrays.asList("pizza1", "pizza2", "pizza3",
+                    "pizza4", "pizza5", "pizza6", "pizza7", "pizza8", "pizza9", "pizza10", "pizza11");
+            String pizzaImageName;
+            if(task.getPizzaId()>pizzaImageNames.size())
+            {
+                pizzaImageName="pizza1";
             }
+            else
+            {
+                pizzaImageName=pizzaImageNames.get(task.getPizzaId()-1);
+            }
+            File path= new File("src/main/res/drawable/");
+                iconImageView.setImageResource(getResources().getIdentifier(pizzaImageName, "drawable", getActivity().getPackageName()));
+            /*
+            int imageResource = getResources().getIdentifier("@drawable/"
+                    +pizzaImageNames.get(task.getPizzaId()-1),null,getActivity().getPackageName());
+            iconImageView.setImageResource(imageResource);
+             */
             doneCheckBoxCateg.setChecked(task.isDone());
 
         }

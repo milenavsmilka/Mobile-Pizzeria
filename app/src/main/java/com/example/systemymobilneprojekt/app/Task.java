@@ -1,5 +1,7 @@
 package com.example.systemymobilneprojekt.app;
 
+import com.example.systemymobilneprojekt.R;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
@@ -13,6 +15,15 @@ public class Task {
     private String description;
     private BigDecimal price;
     private Category category;
+    private int pizzaId;
+
+    public int getPizzaId() {
+        return pizzaId;
+    }
+
+    public void setPizzaId(int pizzaId) {
+        this.pizzaId = pizzaId;
+    }
 
     public BigDecimal getPrice() {
         return price;

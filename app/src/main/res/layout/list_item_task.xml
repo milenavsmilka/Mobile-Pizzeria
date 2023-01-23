@@ -10,8 +10,8 @@
         android:id="@+id/task_img"
         android:layout_width="159dp"
         android:layout_height="match_parent"
-        android:padding="@dimen/task_item_padding"
-        tools:srcCompat="@drawable/ic_studies" />
+        android:paddingRight="53dp"
+        tools:srcCompat="@drawable/pizza1" />
 
     <LinearLayout
         android:layout_width="wrap_content"
