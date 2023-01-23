@@ -3,6 +3,7 @@ package com.example.systemymobilneprojekt.app;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,17 +33,21 @@ public class TaskListFragment extends Fragment {
     private TaskAdapter adapter = null;
     private boolean subtitleVisible;
     public static final String KEY_SUBTITLE = "subtitle";
+    private String username;
+    private String password;
     private FloatingActionButton shoppingBasket;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
-        if (savedInstanceState != null) {
+        Intent myIntent = getActivity().getIntent();
+        username = myIntent.getExtras().getString("username");
+        password = myIntent.getExtras().getString("password");
+        Log.d("NaszeLogi","received: " + username+" " + password);
+        if( savedInstanceState != null){
             subtitleVisible = savedInstanceState.getBoolean(KEY_SUBTITLE);
         }
-
     }
 
     @Nullable
@@ -147,9 +152,9 @@ public class TaskListFragment extends Fragment {
             TextView nameTextView = holder.getTextView();
 
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                        tasks.get(holder.getAdapterPosition()).setDone(isChecked);
-                        updateSubtitle();
-                    }
+                    tasks.get(holder.getAdapterPosition()).setDone(isChecked);
+                    updateSubtitle();
+                }
             );
         }
 
@@ -159,12 +164,12 @@ public class TaskListFragment extends Fragment {
         }
     }
 
-    public void updateSubtitle() {
+    public void updateSubtitle(){
         TaskStorage taskStorage = TaskStorage.getInstance();
         List<Task> tasks = taskStorage.getTasks();
         int toDoTasksCount = 0;
-        for (Task task : tasks) {
-            if (task.isDone()) {
+        for(Task task:tasks){
+            if(task.isDone()){
                 toDoTasksCount++;
             }
         }
@@ -177,7 +182,7 @@ public class TaskListFragment extends Fragment {
             subtitle = getString(R.string.subtitle_format, toDoTasksCount);
         }
 
-        if (!subtitleVisible) {
+        if(!subtitleVisible){
             subtitle = null;
         }
         AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
@@ -197,9 +202,9 @@ public class TaskListFragment extends Fragment {
         inflater.inflate(R.menu.fragment_task_menu, menu);
 
         MenuItem subtitleItem = menu.findItem(R.id.show_subtitle);
-        if (subtitleVisible) {
+        if(subtitleVisible){
             subtitleItem.setTitle(R.string.hide_subtitle);
-        } else {
+        }else {
             subtitleItem.setTitle(R.string.show_subtitle);
         }
     }

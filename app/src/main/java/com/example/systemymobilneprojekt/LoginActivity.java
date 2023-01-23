@@ -7,17 +7,24 @@ import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.systemymobilneprojekt.app.TaskListActivity;
 import com.example.systemymobilneprojekt.db.DatabaseOperations;
+import com.example.systemymobilneprojekt.db.PizzeriaDatabase;
+import com.example.systemymobilneprojekt.db.tables.Client;
+
+import java.util.List;
 /*
 public class MainActivity extends AppCompatActivity {
     EditText username = (EditText)findViewById(R.id.usernameInput);
@@ -62,7 +69,18 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        PizzeriaDatabase.setInstance(this.getApplicationContext());
+        //DatabaseOperations.addPizzasToDb();
+
         setContentView(R.layout.login_activity);
+
+        LinearLayout linearLayout = findViewById(R.id.loginLayout);
+
+        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(1000);
+        animationDrawable.setExitFadeDuration(2000);
+        animationDrawable.start();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("Witaj w pizzerii!", "Witaj w pizzerii!", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = getSystemService(NotificationManager.class);
@@ -78,11 +96,35 @@ public class LoginActivity extends Activity {
         logButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!userEditText.getText().toString().equals("") &&
-                        !passwordEditText.getText().toString().equals("")) {
+                String username=userEditText.getText().toString();
+                String password=passwordEditText.getText().toString();
+                if (!username.equals("") &&
+                        !password.equals("")) {
                     //tu jest logowanie
+                    List<Client> clients = DatabaseOperations.getALlClients();
+                    boolean alreadyInDB=false;
                     sendLoginNotification();
+
+                    Client user;
+                    if(clients!=null)
+                    {
+                        for (Client client: clients){
+                            if(client.username.equals(username) && client.password.equals(password))
+                            {
+                                alreadyInDB=true;
+                            }
+                        }
+                    }
+                    if(!alreadyInDB){
+                        user = new Client();
+                        user.username=username;
+                        user.password=password;
+                        DatabaseOperations.saveNewClient(user);
+                    }
+                    Log.d("NaszeLogi","Zalogowano na: "+username + " " + password);
                     Intent goMenuIntent = new Intent(LoginActivity.this, TaskListActivity.class);
+                    goMenuIntent.putExtra("username",username);
+                    goMenuIntent.putExtra("password",password);
                     startActivity(goMenuIntent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Nie podano danych", Toast.LENGTH_SHORT).show();
