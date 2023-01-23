@@ -78,17 +78,17 @@ public class DatabaseOperations {
                 "ser mozarella, kurczak, cebula czerwona",
                 "ser mozarella, burak, rukola, ser camembert",
                 "ser mozarella, kukurydza, kurczak");
-        List<BigDecimal> pizzaPrices=Arrays.asList(new BigDecimal(25),
+        List<BigDecimal> pizzaPrices=Arrays.asList(new BigDecimal(20),
+                new BigDecimal(24),
                 new BigDecimal(25),
-                new BigDecimal(25),
-                new BigDecimal(25),
-                new BigDecimal(25),
-                new BigDecimal(25),
-                new BigDecimal(25),
-                new BigDecimal(25),
-                new BigDecimal(25),
-                new BigDecimal(25),
-                new BigDecimal(25));
+                new BigDecimal(30),
+                new BigDecimal(28),
+                new BigDecimal(29),
+                new BigDecimal(27),
+                new BigDecimal(20),
+                new BigDecimal(28),
+                new BigDecimal(24),
+                new BigDecimal(21));
         for(int i=0;i<pizzaNames.size();i++) {
             Pizza pizza = new Pizza();
             pizza.name = pizzaNames.get(i);
