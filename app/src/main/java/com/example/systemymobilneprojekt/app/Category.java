@@ -1,15 +1,13 @@
 package com.example.systemymobilneprojekt.app;
 
 public enum Category {
-    MARGHARITTA,
-    CAPRICIOSA,
-    HAWAJSKA,
-    PEPPERONI,
-    WIEJSKA,
-    SYCYLISJKA,
-    AMERICANA,
-    WEGETARIANA,
-    CZTERY_SERY,
-    MIENSA
+    CZOSNKOWY,
+    POMIDOROWY,
+    SEROWY,
+    OSTRY,
+    MEKSYKAŃSKI,
+    BBQ,
+    CURRY,
+    TZATZIKI
 }
 

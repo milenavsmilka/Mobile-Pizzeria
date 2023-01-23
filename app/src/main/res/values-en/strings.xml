@@ -19,4 +19,5 @@
     <string name="address_label">Write your address</string>
     <string name="write_address">Your address</string>
     <string name="click_order">Order</string>
+    <string name="thank_you">Thanks!</string>
 </resources>

@@ -1,10 +1,7 @@
 package com.example.systemymobilneprojekt.app;
 
-import android.provider.ContactsContract;
 import android.util.Log;
 
-import com.example.systemymobilneprojekt.app.Category;
-import com.example.systemymobilneprojekt.app.Task;
 import com.example.systemymobilneprojekt.db.DatabaseOperations;
 import com.example.systemymobilneprojekt.db.tables.Pizza;
 
@@ -28,9 +25,9 @@ public class TaskStorage {
             task.setPrice(pizzas.get(i).price);
             task.setPizzaId(pizzas.get(i).pizzaId);
             if (i % 3 == 0) {
-                task.setCategory(Category.MIENSA);
+                task.setCategory(Category.SEROWY);
             } else {
-                task.setCategory(Category.CAPRICIOSA);
+                task.setCategory(Category.POMIDOROWY);
             }
             tasks.add(task);
         }

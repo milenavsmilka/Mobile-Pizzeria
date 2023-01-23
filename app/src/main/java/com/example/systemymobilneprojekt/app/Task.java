@@ -1,8 +1,5 @@
 package com.example.systemymobilneprojekt.app;
 
-import com.example.systemymobilneprojekt.R;
-
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
 
@@ -36,8 +33,7 @@ public class Task {
     public Task(){
         id = UUID.randomUUID();
         date = new Date();
-        category = Category.CAPRICIOSA;
-
+        category = Category.POMIDOROWY;
     }
 
     public Category getCategory() {
