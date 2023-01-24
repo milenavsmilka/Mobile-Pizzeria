@@ -2,9 +2,9 @@
     <string name="app_name">Menu</string>
 
     <string name="name_hint">Wprowadź nazwę zadania</string>
-    <string name="name_label">Nazwa</string>
-    <string name="details_label">Szczegóły</string>
-    <string name="done_label">Wykonane</string>
+    <string name="name_label">Nazwa Pizzy</string>
+    <string name="details_label">Wybierz sos</string>
+    <string name="done_label">W koszyku</string>
     <string name="task_add_new">Nowe zadanie</string>
     <string name="show_subtitle">Pokaż Koszyk</string>
     <string name="hide_subtitle">Ukryj Koszyk</string>
@@ -26,4 +26,7 @@
     <string name="loginButton" >Login</string>
     <string name="findUsWhere" >Znajdziesz nas na youtube tutaj:</string>
     <string name="rickRollButton" >Odwiedź nas!</string>
+    <string name="choose_size">Wybierz rozmiar</string>
+
+    <string name="Login" >Login</string>
 </resources>

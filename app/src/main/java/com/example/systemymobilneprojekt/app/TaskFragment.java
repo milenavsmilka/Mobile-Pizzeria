@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -37,8 +38,6 @@ public class TaskFragment extends Fragment {
     int currentPizzaId;
     private static final String ARG_TASK_ID = "arg_task_id" ;
 
-    private final Calendar calendar = Calendar.getInstance();
-    private Button dateField;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,20 +58,15 @@ public class TaskFragment extends Fragment {
         return taskFragment;
     }
 
-    private void setupDateFieldValue(Date date) {
-        Locale locale = new Locale("pl","PL");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", locale);
-        dateField.setText(dateFormat.format(date));
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_task, container, false);
 
-        EditText nameField = view.findViewById(R.id.task_name);
+        TextView nameField = view.findViewById(R.id.task_name);
         CheckBox doneCheckBox = view.findViewById(R.id.task_done);
-        Spinner categorySpinner = view.findViewById(R.id.task_category);
+        Spinner categorySpinner = view.findViewById(R.id.dip_category);
         ImageView iconImageView = view.findViewById(R.id.task_img);
         TextView pizzaPriceView = view.findViewById(R.id.pizzaPrice);
         categorySpinner.setAdapter(new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_item, Category.values()));
@@ -103,22 +97,6 @@ public class TaskFragment extends Fragment {
         File path= new File("src/main/res/drawable/");
         iconImageView.setImageResource(getResources().getIdentifier(pizzaImageName, "drawable", getActivity().getPackageName()));
 
-
-        dateField = view.findViewById(R.id.task_date);
-        DatePickerDialog.OnDateSetListener date = (view12, year, month, day)->{
-            calendar.set(Calendar.YEAR, year);
-            calendar.set(Calendar.MONTH, month);
-            calendar.set(Calendar.DAY_OF_MONTH, day);
-            setupDateFieldValue(calendar.getTime());
-            task.setDate(calendar.getTime());
-        };
-
-        dateField.setOnClickListener(view1 -> {
-            new DatePickerDialog(getContext(),date, calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
-            setupDateFieldValue(task.getDate());
-        });
-
         nameField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -136,7 +114,6 @@ public class TaskFragment extends Fragment {
             }
         });
         nameField.setText(task.getName());
-        pizzaPriceView.setText(task.getPrice().toString());
         doneCheckBox.setChecked(task.isDone());
 
         doneCheckBox.setChecked(task.isDone());
