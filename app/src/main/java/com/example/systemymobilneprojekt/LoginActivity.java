@@ -95,35 +95,33 @@ public class LoginActivity extends Activity {
         logButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username=userEditText.getText().toString();
-                String password=passwordEditText.getText().toString();
+                String username = userEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
                 if (!username.equals("") &&
                         !password.equals("")) {
                     //tu jest logowanie
                     List<Client> clients = DatabaseOperations.getALlClients();
-                    boolean alreadyInDB=false;
+                    boolean alreadyInDB = false;
                     sendLoginNotification();
 
                     Client user;
-                    if(clients!=null)
-                    {
-                        for (Client client: clients){
-                            if(client.username.equals(username) && client.password.equals(password))
-                            {
-                                alreadyInDB=true;
+                    if (clients != null) {
+                        for (Client client : clients) {
+                            if (client.username.equals(username) && client.password.equals(password)) {
+                                alreadyInDB = true;
                             }
                         }
                     }
-                    if(!alreadyInDB){
+                    if (!alreadyInDB) {
                         user = new Client();
-                        user.username=username;
-                        user.password=password;
+                        user.username = username;
+                        user.password = password;
                         DatabaseOperations.saveNewClient(user);
                     }
-                    Log.d("NaszeLogi","Zalogowano na: "+username + " " + password);
+                    Log.d("NaszeLogi", "Zalogowano na: " + username + " " + password);
                     Intent goMenuIntent = new Intent(LoginActivity.this, TaskListActivity.class);
-                    goMenuIntent.putExtra("username",username);
-                    goMenuIntent.putExtra("password",password);
+                    goMenuIntent.putExtra("username", username);
+                    goMenuIntent.putExtra("password", password);
                     startActivity(goMenuIntent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Nie podano danych", Toast.LENGTH_SHORT).show();

@@ -5,14 +5,14 @@ import java.util.Date;
 import java.util.UUID;
 
 
-public class Task {
+public class Pizza {
     private UUID id;
     private String name;
     private Date date;
-    private boolean done;
+    private boolean inBasket;
     private String description;
     private BigDecimal price;
-    private Category category;
+    private Category dipCategory;
     private int pizzaId;
 
     public int getPizzaId() {
@@ -31,19 +31,19 @@ public class Task {
         this.price = price;
     }
 
-    public Task(){
+    public Pizza(){
         id = UUID.randomUUID();
         date = new Date();
-        category = Category.POMIDOROWY;
+        dipCategory = Category.POMIDOROWY;
     }
 
-    public Category getCategory() {
-        return category;
+    public Category getDipCategory() {
+        return dipCategory;
     }
 
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setDipCategory(Category dipCategory) {
+        this.dipCategory = dipCategory;
     }
 
     public UUID getId() {
@@ -62,8 +62,8 @@ public class Task {
         return description;
     }
 
-    public boolean isDone() {
-        return done;
+    public boolean isInBasket() {
+        return inBasket;
     }
 
     public void setId(UUID id) {
@@ -82,7 +82,7 @@ public class Task {
         this.date = date;
     }
 
-    public void setDone(boolean done) {
-        this.done = done;
+    public void setInBasket(boolean inBasket) {
+        this.inBasket = inBasket;
     }
 }

@@ -2,8 +2,6 @@ package com.example.systemymobilneprojekt.app;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,17 +22,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.systemymobilneprojekt.R;
-import com.example.systemymobilneprojekt.db.DatabaseOperations;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class TaskListFragment extends Fragment {
     public static final String KEY_SHAKEOMAT_ID = "com.example.zadanie3sm.task_id";
+    public static final String KEY_TOTALPRICE_ID = "com.example.zadanie3sm.totalprice_id";
+    public static final String KEY_LISTOFPIZZAS_ID = "com.example.zadanie3sm.pizzastobasket_id";
     private RecyclerView recyclerView;
     private TaskAdapter adapter = null;
     private boolean subtitleVisible;
@@ -42,6 +41,8 @@ public class TaskListFragment extends Fragment {
     private String username;
     private String password;
     private FloatingActionButton shoppingBasket;
+    private BigDecimal totalPriceOfPizza = BigDecimal.ZERO;
+    private ArrayList<String> listofPizzasToBasket = new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +69,8 @@ public class TaskListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent gotoBasket = new Intent(getActivity(),ShoppingBasketActivity.class);
+                gotoBasket.putExtra(KEY_TOTALPRICE_ID, totalPriceOfPizza);
+                gotoBasket.putExtra(KEY_LISTOFPIZZAS_ID, listofPizzasToBasket);
                 startActivity(gotoBasket);
             }
         });
@@ -83,7 +86,7 @@ public class TaskListFragment extends Fragment {
     }
 
     private class TaskHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private Task task;
+        private Pizza pizza;
         private final TextView nameTextView;
         private final TextView dateTextView;
         private ImageView iconImageView;
@@ -104,24 +107,24 @@ public class TaskListFragment extends Fragment {
 
         }
 
-        public void bind(Task task) {
-            this.task = task;
+        public void bind(Pizza pizza) {
+            this.pizza = pizza;
 
-            nameTextView.setText(task.getName());
+            nameTextView.setText(pizza.getName());
 
-            dateTextView.setText(task.getDescription());
-            priceTextView.setText(task.getPrice().toString());
+            dateTextView.setText(pizza.getDescription());
+            priceTextView.setText(pizza.getPrice().toString());
 
             List<String> pizzaImageNames= Arrays.asList("pizza1", "pizza2", "pizza3",
                     "pizza4", "pizza5", "pizza6", "pizza7", "pizza8", "pizza9", "pizza10", "pizza11");
             String pizzaImageName;
-            if(task.getPizzaId()>pizzaImageNames.size())
+            if(pizza.getPizzaId()>pizzaImageNames.size())
             {
                 pizzaImageName="pizza1";
             }
             else
             {
-                pizzaImageName=pizzaImageNames.get(task.getPizzaId()-1);
+                pizzaImageName=pizzaImageNames.get(pizza.getPizzaId()-1);
             }
             File path= new File("src/main/res/drawable/");
             iconImageView.setImageResource(getResources().getIdentifier(pizzaImageName, "drawable", getActivity().getPackageName()));
@@ -130,15 +133,15 @@ public class TaskListFragment extends Fragment {
                     +pizzaImageNames.get(task.getPizzaId()-1),null,getActivity().getPackageName());
             iconImageView.setImageResource(imageResource);
              */
-            doneCheckBoxCateg.setChecked(task.isDone());
+            doneCheckBoxCateg.setChecked(pizza.isInBasket());
 
         }
 
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getActivity(), MainActivity.class);
-            intent.putExtra(KEY_SHAKEOMAT_ID, task.getId());
-            intent.putExtra("pizzaId",task.getPizzaId());
+            intent.putExtra(KEY_SHAKEOMAT_ID, pizza.getId());
+            intent.putExtra("pizzaId", pizza.getPizzaId());
             startActivity(intent);
         }
 
@@ -152,10 +155,10 @@ public class TaskListFragment extends Fragment {
     }
 
     private class TaskAdapter extends RecyclerView.Adapter<TaskHolder> {
-        private final List<Task> tasks;
+        private final List<Pizza> pizzas;
 
-        public TaskAdapter(List<Task> tasks) {
-            this.tasks = tasks;
+        public TaskAdapter(List<Pizza> pizzas) {
+            this.pizzas = pizzas;
         }
 
         @NonNull
@@ -167,16 +170,16 @@ public class TaskListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull TaskHolder holder, int position) {
-            Task task = tasks.get(position);
-            holder.bind(task);
+            Pizza pizza = pizzas.get(position);
+            holder.bind(pizza);
 
             CheckBox checkBox = holder.getCheckBox();
-            checkBox.setChecked(tasks.get(position).isDone());
+            checkBox.setChecked(pizzas.get(position).isInBasket());
 
             TextView nameTextView = holder.getTextView();
 
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                    tasks.get(holder.getAdapterPosition()).setDone(isChecked);
+                    pizzas.get(holder.getAdapterPosition()).setInBasket(isChecked);
                     updateSubtitle();
                 }
             );
@@ -184,17 +187,21 @@ public class TaskListFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return tasks.size();
+            return pizzas.size();
         }
     }
 
     public void updateSubtitle(){
         TaskStorage taskStorage = TaskStorage.getInstance();
-        List<Task> tasks = taskStorage.getTasks();
+        List<Pizza> pizzas = taskStorage.getTasks();
         int toDoTasksCount = 0;
-        for(Task task:tasks){
-            if(task.isDone()){
+        totalPriceOfPizza = BigDecimal.ZERO;
+        listofPizzasToBasket = new ArrayList<>();
+        for(Pizza pizza : pizzas){
+            if(pizza.isInBasket()){
                 toDoTasksCount++;
+                totalPriceOfPizza = totalPriceOfPizza.add(pizza.getPrice());
+                listofPizzasToBasket.add(pizza.getName());
             }
         }
         String subtitle;
@@ -255,10 +262,10 @@ public class TaskListFragment extends Fragment {
     @SuppressLint("NotifyDataSetChanged")
     private void updateView() {
         TaskStorage taskStorage = TaskStorage.getInstance();
-        List<Task> tasks = taskStorage.getTasks();
+        List<Pizza> pizzas = taskStorage.getTasks();
 
         if (adapter == null) {
-            adapter = new TaskAdapter(tasks);
+            adapter = new TaskAdapter(pizzas);
             recyclerView.setAdapter(adapter);
         } else {
             adapter.notifyDataSetChanged();

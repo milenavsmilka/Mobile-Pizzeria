@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="name_hint">Set task name</string>
+    <string name="name_hint">Set pizza name</string>
     <string name="app_name">Missions</string>
     <string name="name_label">Name of Pizza</string>
     <string name="details_label">Choose the dip</string>
     <string name="done_label">In basket</string>
-    <string name="task_add_new">New task</string>
+    <string name="task_add_new">New pizza</string>
     <string name="show_subtitle">Show subtitle</string>
     <string name="hide_subtitle">Hide subtitle</string>
-    <string name="subtitle_format">%1$d tasks</string>
-    <string name="subtitle_format_many">%1$d tasks</string>
-    <string name="subtitle_format_one">%1$d task</string>
+    <string name="subtitle_format">%1$d pizzas</string>
+    <string name="subtitle_format_many">%1$d pizzas</string>
+    <string name="subtitle_format_one">%1$d pizza</string>
     <string name="Login">Login</string>
     <string name="order_label">Order</string>
     <string name="sum_label">Sum</string>

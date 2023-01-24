@@ -1,29 +1,40 @@
 package com.example.systemymobilneprojekt.app;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.systemymobilneprojekt.R;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class ShoppingBasketActivity extends AppCompatActivity {
 
     private Button closeButton;
     private AlertDialog.Builder builder;
+    private TextView listofPizzaView;
+    private TextView totalPriceView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basket_layout);
 
+        listofPizzaView = findViewById(R.id.list_of_pizzas);
+        totalPriceView = findViewById(R.id.sum_prices);
+
         closeButton = findViewById(R.id.order_button);
         builder = new AlertDialog.Builder(this);
+        BigDecimal totalPrice = (BigDecimal) getIntent().getSerializableExtra(TaskListFragment.KEY_TOTALPRICE_ID);
+        ArrayList<String> nameOfPizzas = (ArrayList<String>) getIntent().getSerializableExtra(TaskListFragment.KEY_LISTOFPIZZAS_ID);
 
+        listofPizzaView.setText(nameOfPizzas.toString());
+        totalPriceView.setText(totalPrice.toString());
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,7 +48,4 @@ public class ShoppingBasketActivity extends AppCompatActivity {
         });
     }
 
-    protected Fragment createFragment(Task task){
-        return new TaskListFragment();
-    }
 }
