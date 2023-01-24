@@ -11,7 +11,7 @@
     <string name="subtitle_format">%1$d pizzas</string>
     <string name="subtitle_format_many">%1$d pizzas</string>
     <string name="subtitle_format_one">%1$d pizza</string>
-    <string name="Login">Login</string>
+    <string name="Login">Pizzeria Mumino</string>
     <string name="order_label">Order</string>
     <string name="sum_label">Sum</string>
     <string name="name_pizzas">List of pizzas</string>
