@@ -45,7 +45,9 @@
         android:layout_height="wrap_content"
         android:text="@string/loginButton"
         android:layout_marginTop="20dp"
-        android:background="@drawable/button_shape"/>
+        android:background="@drawable/button_shape"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"/>
 
     <TextView
         android:id="@+id/findUsWhere"
