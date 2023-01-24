@@ -11,7 +11,7 @@
     <string name="subtitle_format">%1$d tasks</string>
     <string name="subtitle_format_many">%1$d tasks</string>
     <string name="subtitle_format_one">%1$d task</string>
-    <string name="Login">Login</string>
+    <string name="Login">Welcome to our pizzeria!</string>
     <string name="order_label">Order</string>
     <string name="sum_label">Sum</string>
     <string name="name_pizzas">List of pizzas</string>
@@ -20,4 +20,10 @@
     <string name="write_address">Your address</string>
     <string name="click_order">Order</string>
     <string name="thank_you">Thanks!</string>
+    <string name="pizzaLabel">Price:</string>
+    <string name="usernameInput">Username</string>
+    <string name="passwordInput">Password</string>
+    <string name="rickRollButton">Click Here!</string>
+    <string name="findUsWhere">You will find us on youtube here:</string>
+    <string name="loginButton">Login</string>
 </resources>

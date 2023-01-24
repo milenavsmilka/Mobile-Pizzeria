@@ -19,6 +19,11 @@
     <string name="write_address">Twój adres</string>
     <string name="click_order">Zamów</string>
     <string name="thank_you">Dziękujemy!</string>
-
-    <string name="Login" >Login</string>
+    <string name="pizzaLabel" >Cena: </string>
+    <string name="Login" >Witaj w Pizzerii!</string>
+    <string name="usernameInput" >Nazwa użytkownika</string>
+    <string name="passwordInput" >Hasło</string>
+    <string name="loginButton" >Login</string>
+    <string name="findUsWhere" >Znajdziesz nas na youtube tutaj:</string>
+    <string name="rickRollButton" >Odwiedź nas!</string>
 </resources>
