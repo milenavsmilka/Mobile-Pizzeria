@@ -2,9 +2,9 @@
     <string name="app_name">Menu</string>
 
     <string name="name_hint">Wprowadź nazwę zadania</string>
-    <string name="name_label">Nazwa</string>
-    <string name="details_label">Szczegóły</string>
-    <string name="done_label">Wykonane</string>
+    <string name="name_label">Nazwa Pizzy</string>
+    <string name="details_label">Wybierz sos</string>
+    <string name="done_label">W koszyku</string>
     <string name="task_add_new">Nowe zadanie</string>
     <string name="show_subtitle">Pokaż Koszyk</string>
     <string name="hide_subtitle">Ukryj Koszyk</string>
@@ -19,6 +19,7 @@
     <string name="write_address">Twój adres</string>
     <string name="click_order">Zamów</string>
     <string name="thank_you">Dziękujemy!</string>
+    <string name="choose_size">Wybierz rozmiar</string>
 
     <string name="Login" >Login</string>
 </resources>

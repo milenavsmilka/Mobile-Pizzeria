@@ -2,9 +2,9 @@
 <resources>
     <string name="name_hint">Set task name</string>
     <string name="app_name">Missions</string>
-    <string name="name_label">Name</string>
-    <string name="details_label">Details</string>
-    <string name="done_label">Done</string>
+    <string name="name_label">Name of Pizza</string>
+    <string name="details_label">Choose the dip</string>
+    <string name="done_label">In basket</string>
     <string name="task_add_new">New task</string>
     <string name="show_subtitle">Show subtitle</string>
     <string name="hide_subtitle">Hide subtitle</string>
@@ -20,4 +20,5 @@
     <string name="write_address">Your address</string>
     <string name="click_order">Order</string>
     <string name="thank_you">Thanks!</string>
+    <string name="choose_size">Choose size</string>
 </resources>

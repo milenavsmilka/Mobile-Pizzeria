@@ -11,7 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -30,8 +30,6 @@ public class TaskFragment extends Fragment {
     Task task;
     private static final String ARG_TASK_ID = "arg_task_id" ;
 
-    private final Calendar calendar = Calendar.getInstance();
-    private Button dateField;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,20 +48,15 @@ public class TaskFragment extends Fragment {
         return taskFragment;
     }
 
-    private void setupDateFieldValue(Date date) {
-        Locale locale = new Locale("pl","PL");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", locale);
-        dateField.setText(dateFormat.format(date));
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_task, container, false);
 
-        EditText nameField = view.findViewById(R.id.task_name);
+        TextView nameField = view.findViewById(R.id.task_name);
         CheckBox doneCheckBox = view.findViewById(R.id.task_done);
-        Spinner categorySpinner = view.findViewById(R.id.task_category);
+        Spinner categorySpinner = view.findViewById(R.id.dip_category);
         categorySpinner.setAdapter(new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_item, Category.values()));
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -78,37 +71,6 @@ public class TaskFragment extends Fragment {
         });
         categorySpinner.setSelection(task.getCategory().ordinal());
 
-        dateField = view.findViewById(R.id.task_date);
-        DatePickerDialog.OnDateSetListener date = (view12, year, month, day)->{
-            calendar.set(Calendar.YEAR, year);
-            calendar.set(Calendar.MONTH, month);
-            calendar.set(Calendar.DAY_OF_MONTH, day);
-            setupDateFieldValue(calendar.getTime());
-            task.setDate(calendar.getTime());
-        };
-
-        dateField.setOnClickListener(view1 -> {
-            new DatePickerDialog(getContext(),date, calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
-            setupDateFieldValue(task.getDate());
-        });
-
-        nameField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                task.setName(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
         nameField.setText(task.getName());
         doneCheckBox.setChecked(task.isDone());
 
