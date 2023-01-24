@@ -12,6 +12,7 @@
         android:paddingRight="100dp"
         tools:srcCompat="@drawable/pizza1" />
 
+
     <TextView
         style="@style/TextFieldsStyle"
         android:layout_width="match_parent"
