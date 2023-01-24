@@ -20,5 +20,11 @@
     <string name="write_address">Your address</string>
     <string name="click_order">Order</string>
     <string name="thank_you">Thanks!</string>
+    <string name="pizzaLabel">Price:</string>
+    <string name="usernameInput">Username</string>
+    <string name="passwordInput">Password</string>
+    <string name="rickRollButton">Click Here!</string>
+    <string name="findUsWhere">You will find us on youtube here:</string>
+    <string name="loginButton">Login</string>
     <string name="choose_size">Choose size</string>
 </resources>

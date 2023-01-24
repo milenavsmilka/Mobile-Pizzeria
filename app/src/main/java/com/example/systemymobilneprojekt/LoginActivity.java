@@ -63,7 +63,7 @@ public class LoginActivity extends Activity {
     Button logButton, gotoYTButton;
     EditText userEditText, passwordEditText;
 
-    TextView errorTextView;
+    TextView findUsTextView;
     int counter = 3;
 
     @Override
@@ -90,8 +90,7 @@ public class LoginActivity extends Activity {
         userEditText = (EditText) findViewById(R.id.usernameInput);
         passwordEditText = (EditText) findViewById(R.id.passwordInput);
         gotoYTButton = (Button) findViewById(R.id.rickRollButton);
-        errorTextView = (TextView) findViewById(R.id.errorText);
-        errorTextView.setVisibility(View.GONE);
+        findUsTextView = (TextView) findViewById(R.id.findUsWhere);
 
         logButton.setOnClickListener(new View.OnClickListener() {
             @Override

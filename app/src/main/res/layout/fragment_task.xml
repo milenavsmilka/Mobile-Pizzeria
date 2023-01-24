@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_margin="20dp"
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"/>
+    <ImageView
+        android:id="@+id/task_img"
+        android:layout_width="159dp"
+        android:layout_height="100dp"
+        android:paddingRight="100dp"
+        tools:srcCompat="@drawable/pizza1" />
 
 
     <TextView
@@ -15,32 +18,71 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/name_label"
-        android:textColor="@color/purple_700"/>
+        android:textColor="@color/purple_700"
+        android:layout_marginLeft="20dp"/>
 
     <TextView
         android:id="@+id/task_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/name_hint"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:layout_marginLeft="20dp"/>
 
     <TextView
         style="@style/TextFieldsStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/details_label"
-        android:textColor="@color/purple_700"/>
+        android:textColor="@color/purple_700"
+        android:layout_marginLeft="20dp"/>
+
+    <Button
+        style="@style/TextFieldsStyle"
+        android:id="@+id/task_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/purple_200"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:autofillHints=""
+        android:inputType="date"
+        android:layout_marginLeft="20dp"/>
 
     <Spinner
         android:id="@+id/dip_category"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"/>
+    <LinearLayout android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp">
+        <TextView
+            android:id="@+id/pizzaPriceLabel"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/pizzaLabel"
+            style="@style/TextFieldsStyle"
+            android:textColor="@color/purple_700"/>
+        <TextView
+            android:id="@+id/pizzaPrice"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            style="@style/TextFieldsStyle"
+            android:textColor="@color/purple_700"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
 
     <CheckBox
         android:id="@+id/task_done"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/done_label"
-        android:textColor="@color/purple_700"/>
+        android:textColor="@color/purple_700"
+        android:layout_marginLeft="20dp"/>
 
 </LinearLayout>
