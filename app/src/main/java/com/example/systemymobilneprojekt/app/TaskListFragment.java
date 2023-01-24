@@ -124,7 +124,7 @@ public class TaskListFragment extends Fragment {
                 pizzaImageName=pizzaImageNames.get(task.getPizzaId()-1);
             }
             File path= new File("src/main/res/drawable/");
-                iconImageView.setImageResource(getResources().getIdentifier(pizzaImageName, "drawable", getActivity().getPackageName()));
+            iconImageView.setImageResource(getResources().getIdentifier(pizzaImageName, "drawable", getActivity().getPackageName()));
             /*
             int imageResource = getResources().getIdentifier("@drawable/"
                     +pizzaImageNames.get(task.getPizzaId()-1),null,getActivity().getPackageName());
@@ -138,6 +138,7 @@ public class TaskListFragment extends Fragment {
         public void onClick(View v) {
             Intent intent = new Intent(getActivity(), MainActivity.class);
             intent.putExtra(KEY_SHAKEOMAT_ID, task.getId());
+            intent.putExtra("pizzaId",task.getPizzaId());
             startActivity(intent);
         }
 

@@ -12,7 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,14 +23,18 @@ import androidx.fragment.app.Fragment;
 
 import com.example.systemymobilneprojekt.R;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
 public class TaskFragment extends Fragment {
     Task task;
+    int currentPizzaId;
     private static final String ARG_TASK_ID = "arg_task_id" ;
 
     private final Calendar calendar = Calendar.getInstance();
@@ -39,12 +46,14 @@ public class TaskFragment extends Fragment {
 
         assert getArguments() != null;
         UUID taskId = (UUID) getArguments().getSerializable(ARG_TASK_ID);
+        currentPizzaId = (int) getArguments().getSerializable("pizzaId");
         task = TaskStorage.getInstance().getTask(taskId);
     }
 
-    public static TaskFragment newInstance(UUID taskId){
+    public static TaskFragment newInstance(UUID taskId, int pizzaId){
         Bundle bundle = new Bundle();
         bundle.putSerializable(ARG_TASK_ID, taskId);
+        bundle.putSerializable("pizzaId",pizzaId);
         TaskFragment taskFragment = new TaskFragment();
         taskFragment.setArguments(bundle);
         return taskFragment;
@@ -64,6 +73,8 @@ public class TaskFragment extends Fragment {
         EditText nameField = view.findViewById(R.id.task_name);
         CheckBox doneCheckBox = view.findViewById(R.id.task_done);
         Spinner categorySpinner = view.findViewById(R.id.task_category);
+        ImageView iconImageView = view.findViewById(R.id.task_img);
+        TextView pizzaPriceView = view.findViewById(R.id.pizzaPrice);
         categorySpinner.setAdapter(new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_item, Category.values()));
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -77,6 +88,21 @@ public class TaskFragment extends Fragment {
             }
         });
         categorySpinner.setSelection(task.getCategory().ordinal());
+
+        List<String> pizzaImageNames= Arrays.asList("pizza1", "pizza2", "pizza3",
+                "pizza4", "pizza5", "pizza6", "pizza7", "pizza8", "pizza9", "pizza10", "pizza11");
+        String pizzaImageName;
+        if(task.getPizzaId()>pizzaImageNames.size())
+        {
+            pizzaImageName="pizza1";
+        }
+        else
+        {
+            pizzaImageName=pizzaImageNames.get(task.getPizzaId()-1);
+        }
+        File path= new File("src/main/res/drawable/");
+        iconImageView.setImageResource(getResources().getIdentifier(pizzaImageName, "drawable", getActivity().getPackageName()));
+
 
         dateField = view.findViewById(R.id.task_date);
         DatePickerDialog.OnDateSetListener date = (view12, year, month, day)->{
@@ -110,6 +136,7 @@ public class TaskFragment extends Fragment {
             }
         });
         nameField.setText(task.getName());
+        pizzaPriceView.setText(task.getPrice().toString());
         doneCheckBox.setChecked(task.isDone());
 
         doneCheckBox.setChecked(task.isDone());
