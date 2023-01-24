@@ -2,6 +2,8 @@ package com.example.systemymobilneprojekt.app;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +36,7 @@ public class TaskListFragment extends Fragment {
     public static final String KEY_SHAKEOMAT_ID = "com.example.zadanie3sm.task_id";
     public static final String KEY_TOTALPRICE_ID = "com.example.zadanie3sm.totalprice_id";
     public static final String KEY_LISTOFPIZZAS_ID = "com.example.zadanie3sm.pizzastobasket_id";
+    public static String nameOfPizzaKEY = "No pizza";
     private RecyclerView recyclerView;
     private TaskAdapter adapter = null;
     private boolean subtitleVisible;
@@ -43,6 +46,7 @@ public class TaskListFragment extends Fragment {
     private FloatingActionButton shoppingBasket;
     private BigDecimal totalPriceOfPizza = BigDecimal.ZERO;
     private ArrayList<String> listofPizzasToBasket = new ArrayList<>();
+    private TextView priceTextView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,8 +55,8 @@ public class TaskListFragment extends Fragment {
         Intent myIntent = getActivity().getIntent();
         username = myIntent.getExtras().getString("username");
         password = myIntent.getExtras().getString("password");
-        Log.d("NaszeLogi","received: " + username+" " + password);
-        if( savedInstanceState != null){
+        Log.d("NaszeLogi", "received: " + username + " " + password);
+        if (savedInstanceState != null) {
             subtitleVisible = savedInstanceState.getBoolean(KEY_SUBTITLE);
         }
     }
@@ -64,11 +68,11 @@ public class TaskListFragment extends Fragment {
         recyclerView = view.findViewById(R.id.task_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        shoppingBasket= (FloatingActionButton) view.findViewById(R.id.fab);
+        shoppingBasket = (FloatingActionButton) view.findViewById(R.id.fab);
         shoppingBasket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent gotoBasket = new Intent(getActivity(),ShoppingBasketActivity.class);
+                Intent gotoBasket = new Intent(getActivity(), ShoppingBasketActivity.class);
                 gotoBasket.putExtra(KEY_TOTALPRICE_ID, totalPriceOfPizza);
                 gotoBasket.putExtra(KEY_LISTOFPIZZAS_ID, listofPizzasToBasket);
                 startActivity(gotoBasket);
@@ -90,7 +94,7 @@ public class TaskListFragment extends Fragment {
         private final TextView nameTextView;
         private final TextView dateTextView;
         private ImageView iconImageView;
-        private final TextView priceTextView;
+
 
         CheckBox doneCheckBoxCateg;
 
@@ -115,18 +119,18 @@ public class TaskListFragment extends Fragment {
             dateTextView.setText(pizza.getDescription());
             priceTextView.setText(pizza.getPrice().toString());
 
-            List<String> pizzaImageNames= Arrays.asList("pizza1", "pizza2", "pizza3",
+
+
+
+            List<String> pizzaImageNames = Arrays.asList("pizza1", "pizza2", "pizza3",
                     "pizza4", "pizza5", "pizza6", "pizza7", "pizza8", "pizza9", "pizza10", "pizza11");
             String pizzaImageName;
-            if(pizza.getPizzaId()>pizzaImageNames.size())
-            {
-                pizzaImageName="pizza1";
+            if (pizza.getPizzaId() > pizzaImageNames.size()) {
+                pizzaImageName = "pizza1";
+            } else {
+                pizzaImageName = pizzaImageNames.get(pizza.getPizzaId() - 1);
             }
-            else
-            {
-                pizzaImageName=pizzaImageNames.get(pizza.getPizzaId()-1);
-            }
-            File path= new File("src/main/res/drawable/");
+            File path = new File("src/main/res/drawable/");
             iconImageView.setImageResource(getResources().getIdentifier(pizzaImageName, "drawable", getActivity().getPackageName()));
             /*
             int imageResource = getResources().getIdentifier("@drawable/"
@@ -179,9 +183,9 @@ public class TaskListFragment extends Fragment {
             TextView nameTextView = holder.getTextView();
 
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                    pizzas.get(holder.getAdapterPosition()).setInBasket(isChecked);
-                    updateSubtitle();
-                }
+                        pizzas.get(holder.getAdapterPosition()).setInBasket(isChecked);
+                        updateSubtitle();
+                    }
             );
         }
 
@@ -191,14 +195,15 @@ public class TaskListFragment extends Fragment {
         }
     }
 
-    public void updateSubtitle(){
+    public void updateSubtitle() {
+        System.out.println(nameOfPizzaKEY);
         TaskStorage taskStorage = TaskStorage.getInstance();
         List<Pizza> pizzas = taskStorage.getTasks();
         int toDoTasksCount = 0;
         totalPriceOfPizza = BigDecimal.ZERO;
         listofPizzasToBasket = new ArrayList<>();
-        for(Pizza pizza : pizzas){
-            if(pizza.isInBasket()){
+        for (Pizza pizza : pizzas) {
+            if (pizza.isInBasket()) {
                 toDoTasksCount++;
                 totalPriceOfPizza = totalPriceOfPizza.add(pizza.getPrice());
                 listofPizzasToBasket.add(pizza.getName());
@@ -213,11 +218,12 @@ public class TaskListFragment extends Fragment {
             subtitle = getString(R.string.subtitle_format, toDoTasksCount);
         }
 
-        if(!subtitleVisible){
+        if (!subtitleVisible) {
             subtitle = null;
         }
         AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
         appCompatActivity.getSupportActionBar().setSubtitle(subtitle);
+
     }
 
     @Override
@@ -233,9 +239,9 @@ public class TaskListFragment extends Fragment {
         inflater.inflate(R.menu.fragment_task_menu, menu);
 
         MenuItem subtitleItem = menu.findItem(R.id.show_subtitle);
-        if(subtitleVisible){
+        if (subtitleVisible) {
             subtitleItem.setTitle(R.string.hide_subtitle);
-        }else {
+        } else {
             subtitleItem.setTitle(R.string.show_subtitle);
         }
     }

@@ -70,7 +70,7 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         PizzeriaDatabase.setInstance(this.getApplicationContext());
-//        DatabaseOperations.addPizzasToDb();
+        DatabaseOperations.addPizzasToDb();
 
         setContentView(R.layout.login_activity);
 
