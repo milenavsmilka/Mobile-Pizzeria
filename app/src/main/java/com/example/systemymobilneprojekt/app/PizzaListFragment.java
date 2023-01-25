@@ -2,8 +2,6 @@ package com.example.systemymobilneprojekt.app;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TaskListFragment extends Fragment {
+public class PizzaListFragment extends Fragment {
     public static final String KEY_SHAKEOMAT_ID = "com.example.zadanie3sm.task_id";
     public static final String KEY_TOTALPRICE_ID = "com.example.zadanie3sm.totalprice_id";
     public static final String KEY_LISTOFPIZZAS_ID = "com.example.zadanie3sm.pizzastobasket_id";
@@ -99,7 +97,7 @@ public class TaskListFragment extends Fragment {
         CheckBox doneCheckBoxCateg;
 
         public TaskHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.list_item_task, parent, false));
+            super(inflater.inflate(R.layout.list_item_pizza, parent, false));
             itemView.setOnClickListener(this);
 
             nameTextView = itemView.findViewById(R.id.task_item_name);
@@ -197,8 +195,8 @@ public class TaskListFragment extends Fragment {
 
     public void updateSubtitle() {
         System.out.println(nameOfPizzaKEY);
-        TaskStorage taskStorage = TaskStorage.getInstance();
-        List<Pizza> pizzas = taskStorage.getTasks();
+        PizzaStorage pizzaStorage = PizzaStorage.getInstance();
+        List<Pizza> pizzas = pizzaStorage.getTasks();
         int toDoTasksCount = 0;
         totalPriceOfPizza = BigDecimal.ZERO;
         listofPizzasToBasket = new ArrayList<>();
@@ -267,8 +265,8 @@ public class TaskListFragment extends Fragment {
 
     @SuppressLint("NotifyDataSetChanged")
     private void updateView() {
-        TaskStorage taskStorage = TaskStorage.getInstance();
-        List<Pizza> pizzas = taskStorage.getTasks();
+        PizzaStorage pizzaStorage = PizzaStorage.getInstance();
+        List<Pizza> pizzas = pizzaStorage.getTasks();
 
         if (adapter == null) {
             adapter = new TaskAdapter(pizzas);

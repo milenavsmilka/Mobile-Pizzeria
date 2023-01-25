@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class TaskStorage {
-    private static final TaskStorage taskStorage = new TaskStorage();
+public class PizzaStorage {
+    private static final PizzaStorage PIZZA_STORAGE = new PizzaStorage();
 
     private final List<Pizza> pizzas;
 
-    private TaskStorage() {
+    private PizzaStorage() {
         pizzas = new ArrayList<>();
         List<com.example.systemymobilneprojekt.db.tables.Pizza> pizzas = DatabaseOperations.getAllPizzas();
         for (int i = 0; i < pizzas.size(); i++) {
@@ -32,8 +32,8 @@ public class TaskStorage {
         }
     }
 
-    public static TaskStorage getInstance() {
-        return taskStorage;
+    public static PizzaStorage getInstance() {
+        return PIZZA_STORAGE;
     }
 
     public List<Pizza> getTasks() {

@@ -30,7 +30,7 @@
             android:name=".app.ShoppingBasketActivity"
             android:exported="false"/>
         <activity
-            android:name=".app.TaskListActivity"
+            android:name=".app.PizzaListActivity"
             android:exported="false">
         </activity>
         <activity

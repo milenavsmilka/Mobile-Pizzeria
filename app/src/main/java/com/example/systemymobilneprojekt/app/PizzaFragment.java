@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-public class TaskFragment extends Fragment {
+public class PizzaFragment extends Fragment {
     Pizza pizza;
     int currentPizzaId;
     private static final String ARG_TASK_ID = "arg_task_id" ;
@@ -37,23 +37,23 @@ public class TaskFragment extends Fragment {
         assert getArguments() != null;
         UUID taskId = (UUID) getArguments().getSerializable(ARG_TASK_ID);
         currentPizzaId = (int) getArguments().getSerializable("pizzaId");
-        pizza = TaskStorage.getInstance().getTask(taskId);
+        pizza = PizzaStorage.getInstance().getTask(taskId);
     }
 
-    public static TaskFragment newInstance(UUID taskId, int pizzaId){
+    public static PizzaFragment newInstance(UUID taskId, int pizzaId){
         Bundle bundle = new Bundle();
         bundle.putSerializable(ARG_TASK_ID, taskId);
         bundle.putSerializable("pizzaId",pizzaId);
-        TaskFragment taskFragment = new TaskFragment();
-        taskFragment.setArguments(bundle);
-        return taskFragment;
+        PizzaFragment pizzaFragment = new PizzaFragment();
+        pizzaFragment.setArguments(bundle);
+        return pizzaFragment;
     }
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_task, container, false);
+        View view = inflater.inflate(R.layout.fragment_pizza, container, false);
 
         TextView nameField = view.findViewById(R.id.task_name);
         CheckBox doneCheckBox = view.findViewById(R.id.task_done);

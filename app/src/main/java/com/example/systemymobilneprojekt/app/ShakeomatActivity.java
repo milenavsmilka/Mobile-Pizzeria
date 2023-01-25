@@ -1,7 +1,6 @@
 package com.example.systemymobilneprojekt.app;
 
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -13,15 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.systemymobilneprojekt.R;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 public class ShakeomatActivity extends AppCompatActivity implements SensorEventListener {
@@ -77,7 +73,7 @@ public class ShakeomatActivity extends AppCompatActivity implements SensorEventL
                 break;
         }
 
-        TaskListFragment.nameOfPizzaKEY = nameOfPizzaAward;
+        PizzaListFragment.nameOfPizzaKEY = nameOfPizzaAward;
         return award;
     }
 
@@ -126,14 +122,12 @@ public class ShakeomatActivity extends AppCompatActivity implements SensorEventL
                 if (znacznik == 0) {
                     textView.setText(getRandomAward());
 
-                    TaskStorage taskStorage = TaskStorage.getInstance();
-                    List<Pizza> pizzas = taskStorage.getTasks();
+                    PizzaStorage pizzaStorage = PizzaStorage.getInstance();
+                    List<Pizza> pizzas = pizzaStorage.getTasks();
 
                     for (int i = 0; i < pizzas.size(); i++) {
-                        if (pizzas.get(i).getName().equals(TaskListFragment.nameOfPizzaKEY)) {
-//                            priceTextView.setText((pizzas.get(i).getPrice().divide(BigDecimal.valueOf(2.0))).toString());
-                            //priceTextView.setTextColor(ColorStateList.valueOf(4));
-                            pizzas.get(i).setPrice(pizzas.get(i).getPrice().divide(BigDecimal.valueOf(2.0)));
+                        if (pizzas.get(i).getName().equals(PizzaListFragment.nameOfPizzaKEY)) {
+                           pizzas.get(i).setPrice(pizzas.get(i).getPrice().divide(BigDecimal.valueOf(2.0)));
                         }
                     }
                 }

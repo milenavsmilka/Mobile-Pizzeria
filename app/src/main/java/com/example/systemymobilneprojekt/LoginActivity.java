@@ -19,7 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.systemymobilneprojekt.app.TaskListActivity;
+import com.example.systemymobilneprojekt.app.PizzaListActivity;
 import com.example.systemymobilneprojekt.db.DatabaseOperations;
 import com.example.systemymobilneprojekt.db.PizzeriaDatabase;
 import com.example.systemymobilneprojekt.db.tables.Client;
@@ -119,7 +119,7 @@ public class LoginActivity extends Activity {
                         DatabaseOperations.saveNewClient(user);
                     }
                     Log.d("NaszeLogi", "Zalogowano na: " + username + " " + password);
-                    Intent goMenuIntent = new Intent(LoginActivity.this, TaskListActivity.class);
+                    Intent goMenuIntent = new Intent(LoginActivity.this, PizzaListActivity.class);
                     goMenuIntent.putExtra("username", username);
                     goMenuIntent.putExtra("password", password);
                     startActivity(goMenuIntent);

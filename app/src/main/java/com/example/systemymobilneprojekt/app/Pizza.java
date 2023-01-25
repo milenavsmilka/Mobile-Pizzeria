@@ -1,14 +1,12 @@
 package com.example.systemymobilneprojekt.app;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.UUID;
 
 
 public class Pizza {
     private UUID id;
     private String name;
-    private Date date;
     private boolean inBasket;
     private String description;
     private BigDecimal price;
@@ -33,7 +31,6 @@ public class Pizza {
 
     public Pizza(){
         id = UUID.randomUUID();
-        date = new Date();
         dipCategory = Category.POMIDOROWY;
     }
 
@@ -54,10 +51,6 @@ public class Pizza {
         return name;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -76,10 +69,6 @@ public class Pizza {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public void setInBasket(boolean inBasket) {
