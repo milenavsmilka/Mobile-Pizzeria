@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -72,10 +73,17 @@ public class TaskListFragment extends Fragment {
         shoppingBasket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(listofPizzasToBasket!=null && listofPizzasToBasket.size()!=0)
+                {
                 Intent gotoBasket = new Intent(getActivity(), ShoppingBasketActivity.class);
                 gotoBasket.putExtra(KEY_TOTALPRICE_ID, totalPriceOfPizza);
                 gotoBasket.putExtra(KEY_LISTOFPIZZAS_ID, listofPizzasToBasket);
                 startActivity(gotoBasket);
+                }
+                else
+                {
+                    Toast.makeText(getActivity().getApplicationContext(), "Puste zamówienie!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
