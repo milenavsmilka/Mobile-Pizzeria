@@ -9,6 +9,7 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,59 +20,32 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.systemymobilneprojekt.api.DataFromApi;
 import com.example.systemymobilneprojekt.app.PizzaListActivity;
 import com.example.systemymobilneprojekt.db.DatabaseOperations;
 import com.example.systemymobilneprojekt.db.PizzeriaDatabase;
 import com.example.systemymobilneprojekt.db.tables.Client;
 
+import java.math.BigDecimal;
 import java.util.List;
-/*
-public class MainActivity extends AppCompatActivity {
-    EditText username = (EditText)findViewById(R.id.usernameInput);
-    EditText password = (EditText)findViewById(R.id.passwordInput);
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        DatabaseOperations databaseOperations = new DatabaseOperations();
-        // przyklad dodania uzytkownika i wyswietlenia go w logcat
-        databaseOperations.saveNewClient("adam","spadam",this.getApplicationContext());
-        List<Client> list = databaseOperations.getAllClients(this.getApplicationContext());
-        for (Client client: list) {
-            Log.d("NaszeLogi", client.clientId+" "+client.username+" "+client.password+" "+client.promotionPizzaId);
-        }
+import java.util.Objects;
 
-        new DataFromApi().execute();
-
-
-
-    }
-
-    public void login(View view) {
-        if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin")){
-            Log.d("NaszeLogi", "Poprawnie zalogowano");
-            //correcct password
-        }else{
-            Log.d("NaszeLogi", "Nie podano danych");
-        }
-            //wrong password
-    }
-}
-*/
 
 public class LoginActivity extends Activity {
     Button logButton, gotoYTButton;
     EditText userEditText, passwordEditText;
 
-    TextView findUsTextView;
+    TextView findUsTextView, temperatureTextView, pressureTextView, temperatureTextTextView;
     int counter = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        DataFromApi dataFromApi = new DataFromApi();
+        Thread t1 = new Thread(dataFromApi);
+        t1.start();
         super.onCreate(savedInstanceState);
         PizzeriaDatabase.setInstance(this.getApplicationContext());
-        DatabaseOperations.addPizzasToDb();
-
+        //DatabaseOperations.addPizzasToDb();
         setContentView(R.layout.login_activity);
 
         LinearLayout linearLayout = findViewById(R.id.loginLayout);

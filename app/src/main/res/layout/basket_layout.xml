@@ -10,7 +10,7 @@
         android:layout_width="30dp"/>
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="496dp"
+        android:layout_height="600dp"
         android:layout_margin="10.0dp"
         android:layout_marginTop="15.0dp"
         android:background="@drawable/shadow_border"
@@ -85,6 +85,26 @@
             android:layout_height="wrap_content"
             android:text="@string/click_order"
             android:textSize="17sp"/>
+
+        <TextView
+            android:id="@+id/temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="25dp"
+            android:layout_marginTop="30dp"/>
+        <TextView
+            android:id="@+id/temperatureText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="25dp"/>
+        <TextView
+            android:id="@+id/pressure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="25dp"/>
 
     </TableLayout>
 

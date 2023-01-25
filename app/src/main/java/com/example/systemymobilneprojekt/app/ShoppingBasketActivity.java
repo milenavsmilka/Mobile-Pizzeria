@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.systemymobilneprojekt.R;
+import com.example.systemymobilneprojekt.api.DataFromApi;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -19,6 +20,9 @@ public class ShoppingBasketActivity extends AppCompatActivity {
     private AlertDialog.Builder builder;
     private TextView listofPizzaView;
     private TextView totalPriceView;
+    private TextView temperatureTextView;
+    private TextView temperatureTextTextView;
+    private TextView pressureTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +36,17 @@ public class ShoppingBasketActivity extends AppCompatActivity {
         builder = new AlertDialog.Builder(this);
         BigDecimal totalPrice = (BigDecimal) getIntent().getSerializableExtra(PizzaListFragment.KEY_TOTALPRICE_ID);
         ArrayList<String> nameOfPizzas = (ArrayList<String>) getIntent().getSerializableExtra(PizzaListFragment.KEY_LISTOFPIZZAS_ID);
+
+        temperatureTextView = (TextView) findViewById(R.id.temperature);
+        temperatureTextTextView = (TextView) findViewById(R.id.temperatureText);
+        pressureTextView = (TextView) findViewById(R.id.pressure);
+        if(!(DataFromApi.getPressure().compareTo(BigDecimal.valueOf(-100))==0))
+        {
+            temperatureTextTextView.setText(DataFromApi.getTemperatureText());
+            temperatureTextView.setText(DataFromApi.getTemperatureRelatedText());
+            pressureTextView.setText(DataFromApi.getPressureText());
+        }
+
 
         listofPizzaView.setText(nameOfPizzas.toString());
         totalPriceView.setText(totalPrice.toString());

@@ -26,4 +26,5 @@
     <string name="findUsWhere" >Znajdziesz nas na youtube tutaj:</string>
     <string name="rickRollButton" >Odwiedź nas!</string>
     <string name="choose_size">Wybierz rozmiar</string>
+    <string name="name_hint">Ustaw nazwę pizzy</string>
 </resources>
