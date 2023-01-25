@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Missions</string>
+    <string name="name_hint">Set pizza name</string>
+    <string name="app_name">Pizza\'s Mumino</string>
     <string name="name_label">Name of Pizza</string>
     <string name="details_label">Choose the dip</string>
     <string name="done_label">In basket</string>
