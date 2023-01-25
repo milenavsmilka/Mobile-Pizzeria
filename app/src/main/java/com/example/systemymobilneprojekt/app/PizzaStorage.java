@@ -36,15 +36,11 @@ public class PizzaStorage {
         return PIZZA_STORAGE;
     }
 
-    public List<Pizza> getTasks() {
+    public List<Pizza> getPizzas() {
         return pizzas;
     }
 
-    public void addTask(Pizza pizza) {
-        pizzas.add(pizza);
-    }
-
-    public Pizza getTask(UUID id) {
+    public Pizza getPizza(UUID id) {
         for (int i = 0; i < pizzas.size(); i++) {
             if (pizzas.get(i).getId().equals(id)) {
                 return pizzas.get(i);

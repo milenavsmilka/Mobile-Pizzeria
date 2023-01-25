@@ -19,7 +19,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.systemymobilneprojekt.R;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -37,7 +36,7 @@ public class PizzaFragment extends Fragment {
         assert getArguments() != null;
         UUID taskId = (UUID) getArguments().getSerializable(ARG_TASK_ID);
         currentPizzaId = (int) getArguments().getSerializable("pizzaId");
-        pizza = PizzaStorage.getInstance().getTask(taskId);
+        pizza = PizzaStorage.getInstance().getPizza(taskId);
     }
 
     public static PizzaFragment newInstance(UUID taskId, int pizzaId){
@@ -59,7 +58,6 @@ public class PizzaFragment extends Fragment {
         CheckBox doneCheckBox = view.findViewById(R.id.task_done);
         Spinner categorySpinner = view.findViewById(R.id.dip_category);
         ImageView iconImageView = view.findViewById(R.id.task_img);
-        TextView pizzaPriceView = view.findViewById(R.id.pizzaPrice);
         categorySpinner.setAdapter(new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_item, Category.values()));
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -85,7 +83,6 @@ public class PizzaFragment extends Fragment {
         {
             pizzaImageName=pizzaImageNames.get(pizza.getPizzaId()-1);
         }
-        File path= new File("src/main/res/drawable/");
         iconImageView.setImageResource(getResources().getIdentifier(pizzaImageName, "drawable", getActivity().getPackageName()));
 
         nameField.addTextChangedListener(new TextWatcher() {

@@ -1,6 +1,6 @@
 package com.example.systemymobilneprojekt.app;
 
-import android.graphics.Color;
+import android.annotation.SuppressLint;
 import android.graphics.drawable.AnimationDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,19 +27,9 @@ public class ShakeomatActivity extends AppCompatActivity implements SensorEventL
     private ImageView imageView;
     private TextView textView;
     private SensorManager sensorManager;
-    private Sensor mySensor;
-    private long lastUpdate, actualTime;
+    private long lastUpdate;
     private int countfOfShake = 0;
     private int znacznik = 0;
-
-    private int getRandomColor() {
-        Random nr = new Random();
-        int r = nr.nextInt(256);
-        int g = nr.nextInt(256);
-        int b = nr.nextInt(256);
-
-        return Color.argb(255, r, g, b);
-    }
 
     private String getRandomAward() {
         znacznik++;
@@ -97,7 +86,7 @@ public class ShakeomatActivity extends AppCompatActivity implements SensorEventL
         lastUpdate = System.currentTimeMillis();
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        mySensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        Sensor mySensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
 
 
@@ -116,6 +105,7 @@ public class ShakeomatActivity extends AppCompatActivity implements SensorEventL
         sensorManager.unregisterListener(this);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         if (sensorEvent.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
@@ -133,7 +123,7 @@ public class ShakeomatActivity extends AppCompatActivity implements SensorEventL
                     textView.setText(getRandomAward());
 
                     PizzaStorage pizzaStorage = PizzaStorage.getInstance();
-                    List<Pizza> pizzas = pizzaStorage.getTasks();
+                    List<Pizza> pizzas = pizzaStorage.getPizzas();
 
                     for (int i = 0; i < pizzas.size(); i++) {
                         if (pizzas.get(i).getName().equals(PizzaListFragment.nameOfPizzaKEY)) {
@@ -148,10 +138,9 @@ public class ShakeomatActivity extends AppCompatActivity implements SensorEventL
             }
 
             if (devAccel >= 1.5) {
-                actualTime = System.currentTimeMillis();
+                long actualTime = System.currentTimeMillis();
                 if ((actualTime - lastUpdate) > 1000) {
                     lastUpdate = actualTime;
-                    //textView.setBackgroundColor(getRandomColor());
 
                     Random nr = new Random();
                     WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
@@ -161,7 +150,7 @@ public class ShakeomatActivity extends AppCompatActivity implements SensorEventL
                     imageView.setX(width);
                     imageView.setY(height);
 
-                    imageView.setRotation(width / 10 + height);
+                    imageView.setRotation((float) (width / (10.0) + height));
 
                     if (countfOfShake == 100) {
                         Handler handler = new Handler();

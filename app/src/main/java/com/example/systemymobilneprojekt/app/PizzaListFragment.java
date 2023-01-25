@@ -25,11 +25,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.systemymobilneprojekt.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class PizzaListFragment extends Fragment {
     public static final String KEY_SHAKEOMAT_ID = "com.example.zadanie3sm.task_id";
@@ -40,9 +40,6 @@ public class PizzaListFragment extends Fragment {
     private TaskAdapter adapter = null;
     private boolean subtitleVisible;
     public static final String KEY_SUBTITLE = "subtitle";
-    private String username;
-    private String password;
-    private FloatingActionButton shoppingBasket;
     private BigDecimal totalPriceOfPizza = BigDecimal.ZERO;
     private ArrayList<String> listofPizzasToBasket = new ArrayList<>();
     private TextView priceTextView;
@@ -51,9 +48,9 @@ public class PizzaListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        Intent myIntent = getActivity().getIntent();
-        username = myIntent.getExtras().getString("username");
-        password = myIntent.getExtras().getString("password");
+        Intent myIntent = requireActivity().getIntent();
+        String username = myIntent.getExtras().getString("username");
+        String password = myIntent.getExtras().getString("password");
         Log.d("NaszeLogi", "received: " + username + " " + password);
         if (savedInstanceState != null) {
             subtitleVisible = savedInstanceState.getBoolean(KEY_SUBTITLE);
@@ -67,21 +64,18 @@ public class PizzaListFragment extends Fragment {
         recyclerView = view.findViewById(R.id.task_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        shoppingBasket = (FloatingActionButton) view.findViewById(R.id.fab);
-        shoppingBasket.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(listofPizzasToBasket!=null && listofPizzasToBasket.size()!=0)
-                {
-                Intent gotoBasket = new Intent(getActivity(), ShoppingBasketActivity.class);
-                gotoBasket.putExtra(KEY_TOTALPRICE_ID, totalPriceOfPizza);
-                gotoBasket.putExtra(KEY_LISTOFPIZZAS_ID, listofPizzasToBasket);
-                startActivity(gotoBasket);
-                }
-                else
-                {
-                    Toast.makeText(getActivity().getApplicationContext(), "Puste zamówienie!", Toast.LENGTH_SHORT).show();
-                }
+        FloatingActionButton shoppingBasket = view.findViewById(R.id.fab);
+        shoppingBasket.setOnClickListener(view1 -> {
+            if(listofPizzasToBasket!=null && listofPizzasToBasket.size()!=0)
+            {
+            Intent gotoBasket = new Intent(getActivity(), ShoppingBasketActivity.class);
+            gotoBasket.putExtra(KEY_TOTALPRICE_ID, totalPriceOfPizza);
+            gotoBasket.putExtra(KEY_LISTOFPIZZAS_ID, listofPizzasToBasket);
+            startActivity(gotoBasket);
+            }
+            else
+            {
+                Toast.makeText(requireActivity().getApplicationContext(), "Puste zamówienie!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -99,7 +93,7 @@ public class PizzaListFragment extends Fragment {
         private Pizza pizza;
         private final TextView nameTextView;
         private final TextView dateTextView;
-        private ImageView iconImageView;
+        private final ImageView iconImageView;
 
 
         CheckBox doneCheckBoxCateg;
@@ -117,6 +111,7 @@ public class PizzaListFragment extends Fragment {
 
         }
 
+        @SuppressLint({"SetTextI18n", "DiscouragedApi"})
         public void bind(Pizza pizza) {
             this.pizza = pizza;
 
@@ -133,13 +128,7 @@ public class PizzaListFragment extends Fragment {
             } else {
                 pizzaImageName = pizzaImageNames.get(pizza.getPizzaId() - 1);
             }
-            File path = new File("src/main/res/drawable/");
-            iconImageView.setImageResource(getResources().getIdentifier(pizzaImageName, "drawable", getActivity().getPackageName()));
-            /*
-            int imageResource = getResources().getIdentifier("@drawable/"
-                    +pizzaImageNames.get(task.getPizzaId()-1),null,getActivity().getPackageName());
-            iconImageView.setImageResource(imageResource);
-             */
+            iconImageView.setImageResource(getResources().getIdentifier(pizzaImageName, "drawable", requireActivity().getPackageName()));
             doneCheckBoxCateg.setChecked(pizza.isInBasket());
 
         }
@@ -154,10 +143,6 @@ public class PizzaListFragment extends Fragment {
 
         public CheckBox getCheckBox() {
             return this.doneCheckBoxCateg;
-        }
-
-        public TextView getTextView() {
-            return nameTextView;
         }
     }
 
@@ -183,8 +168,6 @@ public class PizzaListFragment extends Fragment {
             CheckBox checkBox = holder.getCheckBox();
             checkBox.setChecked(pizzas.get(position).isInBasket());
 
-            TextView nameTextView = holder.getTextView();
-
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                         pizzas.get(holder.getAdapterPosition()).setInBasket(isChecked);
                         updateSubtitle();
@@ -201,7 +184,7 @@ public class PizzaListFragment extends Fragment {
     public void updateSubtitle() {
         System.out.println(nameOfPizzaKEY);
         PizzaStorage pizzaStorage = PizzaStorage.getInstance();
-        List<Pizza> pizzas = pizzaStorage.getTasks();
+        List<Pizza> pizzas = pizzaStorage.getPizzas();
         int toDoTasksCount = 0;
         totalPriceOfPizza = BigDecimal.ZERO;
         listofPizzasToBasket = new ArrayList<>();
@@ -225,7 +208,8 @@ public class PizzaListFragment extends Fragment {
             subtitle = null;
         }
         AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
-        appCompatActivity.getSupportActionBar().setSubtitle(subtitle);
+        assert appCompatActivity != null;
+        Objects.requireNonNull(appCompatActivity.getSupportActionBar()).setSubtitle(subtitle);
 
     }
 
@@ -258,7 +242,7 @@ public class PizzaListFragment extends Fragment {
                 return true;
             case (R.id.show_subtitle):
                 subtitleVisible = !subtitleVisible;
-                getActivity().invalidateOptionsMenu();
+                requireActivity().invalidateOptionsMenu();
 
                 updateSubtitle();
                 return true;
@@ -271,7 +255,7 @@ public class PizzaListFragment extends Fragment {
     @SuppressLint("NotifyDataSetChanged")
     private void updateView() {
         PizzaStorage pizzaStorage = PizzaStorage.getInstance();
-        List<Pizza> pizzas = pizzaStorage.getTasks();
+        List<Pizza> pizzas = pizzaStorage.getPizzas();
 
         if (adapter == null) {
             adapter = new TaskAdapter(pizzas);
