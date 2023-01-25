@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,9 +35,7 @@ import java.util.Objects;
 public class LoginActivity extends Activity {
     Button logButton, gotoYTButton;
     EditText userEditText, passwordEditText;
-
-    TextView findUsTextView, temperatureTextView, pressureTextView, temperatureTextTextView;
-    int counter = 3;
+    ImageView pizzaImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +63,7 @@ public class LoginActivity extends Activity {
         userEditText = (EditText) findViewById(R.id.usernameInput);
         passwordEditText = (EditText) findViewById(R.id.passwordInput);
         gotoYTButton = (Button) findViewById(R.id.rickRollButton);
-        findUsTextView = (TextView) findViewById(R.id.findUsWhere);
+        pizzaImageView = (ImageView) findViewById(R.id.pizzaImage);
 
         logButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +72,6 @@ public class LoginActivity extends Activity {
                 String password = passwordEditText.getText().toString();
                 if (!username.equals("") &&
                         !password.equals("")) {
-                    //tu jest logowanie
                     List<Client> clients = DatabaseOperations.getALlClients();
                     boolean alreadyInDB = false;
                     sendLoginNotification();

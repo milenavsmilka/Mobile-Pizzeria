@@ -8,7 +8,11 @@
     tools:context=".LoginActivity"
     android:background="@drawable/gradient_list"
     android:id="@+id/loginLayout">
-
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shadow_border"
+        android:gravity="center">
     <TextView
         style="@style/TextFieldsStyle"
         android:id = "@+id/textview"
@@ -16,67 +20,80 @@
         android:layout_width="match_parent"
         android:layout_height = "wrap_content"
         android:textSize = "40sp"
-        android:textColor="#FFF2F2"
+        android:textColor="#3E3E3E"
         android:gravity="center"
-        android:padding="30dp"
         android:textStyle="bold"
         android:shadowColor="#00ccff"
         android:shadowRadius="2"
         android:shadowDx="5"
         android:shadowDy="5"/>
+    </TableLayout>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="10.0dp"
+            android:layout_marginLeft="10.0dp"
+            android:layout_marginRight="10.0dp"
+            android:background="@drawable/shadow_border"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="20dp">
+            <EditText
+                android:id = "@+id/usernameInput"
+                android:layout_width = "wrap_content"
+                android:layout_height = "wrap_content"
+                android:hint = "@string/usernameInput"
+                android:focusable = "true"
+                android:ems="10"
+                android:textColorHighlight = "#ff7eff15"
+                android:textColorHint = "#2989FF"/>
 
-    <LinearLayout
+            <EditText
+                android:id="@+id/passwordInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:textColorHint="#2989FF"
+                android:hint="@string/passwordInput" />
+
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/loginButton"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_shape"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp" />
+        </TableLayout>
+    <ImageView
+        android:id="@+id/pizzaImage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_height="300dp"
+        android:paddingEnd="110dp"
+        android:rotation="90"
+        android:src="@drawable/pizza1" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10.0dp"
+            android:layout_marginLeft="10.0dp"
+            android:layout_marginRight="10.0dp"
+            android:orientation="horizontal"
+            android:gravity="bottom">
 
-    <EditText
-        android:id = "@+id/usernameInput"
-        android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:hint = "@string/usernameInput"
-        android:focusable = "true"
-        android:ems="10"
-        android:textColorHighlight = "#ff7eff15"
-        android:textColorHint = "#2989FF"
-        android:layout_marginTop = "100dp"/>
+            <Button
+                android:id="@+id/rickRollButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rickRollButton"
+                android:textSize="15dp"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:background="@drawable/invisiblebutton"/>
+        </TableLayout>
 
-    <EditText
-        android:id="@+id/passwordInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:textColorHint="#2989FF"
-        android:hint="@string/passwordInput" />
-
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/loginButton"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_shape"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp" />
-
-    <TextView
-        android:id="@+id/findUsWhere"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25dp"
-        android:text="@string/findUsWhere"
-        android:layout_marginTop="100dp"/>
-
-    <Button
-        android:id="@+id/rickRollButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/rickRollButton"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:background="@drawable/button_shape"/>
-    </LinearLayout>
 </LinearLayout>
