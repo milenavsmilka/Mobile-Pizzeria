@@ -23,6 +23,7 @@ public class ShoppingBasketActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Koszyk");
         setContentView(R.layout.basket_layout);
 
         listofPizzaView = findViewById(R.id.list_of_pizzas);
