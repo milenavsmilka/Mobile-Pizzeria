@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 
 import com.example.systemymobilneprojekt.R;
 
@@ -31,8 +30,8 @@ public class ShoppingBasketActivity extends AppCompatActivity {
 
         closeButton = findViewById(R.id.order_button);
         builder = new AlertDialog.Builder(this);
-        BigDecimal totalPrice = (BigDecimal) getIntent().getSerializableExtra(TaskListFragment.KEY_TOTALPRICE_ID);
-        ArrayList<String> nameOfPizzas = (ArrayList<String>) getIntent().getSerializableExtra(TaskListFragment.KEY_LISTOFPIZZAS_ID);
+        BigDecimal totalPrice = (BigDecimal) getIntent().getSerializableExtra(PizzaListFragment.KEY_TOTALPRICE_ID);
+        ArrayList<String> nameOfPizzas = (ArrayList<String>) getIntent().getSerializableExtra(PizzaListFragment.KEY_LISTOFPIZZAS_ID);
 
         listofPizzaView.setText(nameOfPizzas.toString());
         totalPriceView.setText(totalPrice.toString());
