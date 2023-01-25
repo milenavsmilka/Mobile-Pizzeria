@@ -5,8 +5,8 @@
     <string name="details_label">Choose the dip</string>
     <string name="done_label">In basket</string>
     <string name="task_add_new">New pizza</string>
-    <string name="show_subtitle">Show subtitle</string>
-    <string name="hide_subtitle">Hide subtitle</string>
+    <string name="show_subtitle">Show basket</string>
+    <string name="hide_subtitle">Hide basket</string>
     <string name="subtitle_format">%1$d pizzas</string>
     <string name="subtitle_format_many">%1$d pizzas</string>
     <string name="subtitle_format_one">%1$d pizza</string>
