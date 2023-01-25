@@ -1,6 +1,7 @@
 package com.example.systemymobilneprojekt.app;
 
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -12,12 +13,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.systemymobilneprojekt.R;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class ShakeomatActivity extends AppCompatActivity implements SensorEventListener {
@@ -46,51 +50,32 @@ public class ShakeomatActivity extends AppCompatActivity implements SensorEventL
         String nameOfPizzaAward;
         String award;
 
-        if (awardNr == 1) {
-            award = "Vesuvio za pół ceny!";
-            nameOfPizzaAward = "Vesuvio";
-        } else if (awardNr == 2) {
-            award = "Salami za pół ceny!";
-            nameOfPizzaAward = "Salami";
-        } else if (awardNr == 3) {
-            award = "Grecka za pół ceny!";
-            nameOfPizzaAward = "Grecka";
-        } else if (awardNr == 4) {
-            award = "Swojska za pół ceny!";
-            nameOfPizzaAward = "Swojska";
-        } else if (awardNr == 5) {
-            award = "Hawajska za pół ceny!";
-            nameOfPizzaAward = "Hawajska";
-        } else {
-            nameOfPizzaAward = "No pizza";
-            award = nameOfPizzaAward;
+        switch (awardNr) {
+            case 1:
+                award = "Vesuvio za pół ceny!";
+                nameOfPizzaAward = "Vesuvio";
+                break;
+            case 2:
+                award = "Salami za pół ceny!";
+                nameOfPizzaAward = "Salami";
+                break;
+            case 3:
+                award = "Grecka za pół ceny!";
+                nameOfPizzaAward = "Grecka";
+                break;
+            case 4:
+                award = "Swojska za pół ceny!";
+                nameOfPizzaAward = "Swojska";
+                break;
+            case 5:
+                award = "Hawajska za pół ceny!";
+                nameOfPizzaAward = "Hawajska";
+                break;
+            default:
+                nameOfPizzaAward = "No pizza";
+                award = nameOfPizzaAward;
+                break;
         }
-//        switch (awardNr) {
-//            case 1:
-//                award = "Vesuvio za pół ceny!";
-//                nameOfPizzaAward = "Vesuvio";
-//                break;
-//            case 2:
-//                award = "Salami za pół ceny!";
-//                nameOfPizzaAward = "Salami";
-//                break;
-//            case 3:
-//                award = "Grecka za pół ceny!";
-//                nameOfPizzaAward = "Grecka";
-//                break;
-//            case 4:
-//                award = "Swojska za pół ceny!";
-//                nameOfPizzaAward = "Swojska";
-//                break;
-//            case 5:
-//                award = "Hawajska za pół ceny!";
-//                nameOfPizzaAward = "Hawajska";
-//                break;
-//            default:
-//                nameOfPizzaAward = "No pizza";
-//                award = nameOfPizzaAward;
-//                break;
-//        }
 
         TaskListFragment.nameOfPizzaKEY = nameOfPizzaAward;
         return award;
@@ -99,6 +84,7 @@ public class ShakeomatActivity extends AppCompatActivity implements SensorEventL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Shakeomat");
         setContentView(R.layout.sensor);
 
         imageView = findViewById(R.id.imageView);
