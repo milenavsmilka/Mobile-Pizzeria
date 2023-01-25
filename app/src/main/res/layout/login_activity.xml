@@ -1,99 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/pizza_tlo"
     android:orientation="vertical"
-    tools:context=".LoginActivity"
-    android:background="@drawable/gradient_list"
-    android:id="@+id/loginLayout">
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="60dp" />
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shadow_border"
         android:gravity="center">
-    <TextView
-        style="@style/TextFieldsStyle"
-        android:id = "@+id/textview"
-        android:text = "@string/Login"
-        android:layout_width="match_parent"
-        android:layout_height = "wrap_content"
-        android:textSize = "40sp"
-        android:textColor="#3E3E3E"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:shadowColor="#00ccff"
-        android:shadowRadius="2"
-        android:shadowDx="5"
-        android:shadowDy="5"/>
-    </TableLayout>
-        <TableLayout
+
+        <TextView
+            android:id="@+id/textview"
+            style="@style/TextFieldsStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:layout_marginBottom="10.0dp"
-            android:layout_marginLeft="10.0dp"
-            android:layout_marginRight="10.0dp"
-            android:background="@drawable/shadow_border"
-            android:orientation="horizontal"
             android:gravity="center"
-            android:padding="20dp">
-            <EditText
-                android:id = "@+id/usernameInput"
-                android:layout_width = "wrap_content"
-                android:layout_height = "wrap_content"
-                android:hint = "@string/usernameInput"
-                android:focusable = "true"
-                android:ems="10"
-                android:textColorHighlight = "#ff7eff15"
-                android:textColorHint = "#2989FF"/>
+            android:shadowColor="#951616"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="2"
+            android:text="@string/Login"
+            android:textColor="@color/purple_700"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+    </TableLayout>
 
-            <EditText
-                android:id="@+id/passwordInput"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:ems="10"
-                android:textColorHint="#2989FF"
-                android:hint="@string/passwordInput" />
-
-            <Button
-                android:id="@+id/loginButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/loginButton"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/button_shape"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp" />
-        </TableLayout>
-    <ImageView
-        android:id="@+id/pizzaImage"
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:paddingEnd="110dp"
-        android:rotation="90"
-        android:src="@drawable/pizza1" />
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10.0dp"
-            android:layout_marginLeft="10.0dp"
-            android:layout_marginRight="10.0dp"
-            android:orientation="horizontal"
-            android:gravity="bottom">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10.0dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="10.0dp"
+        android:layout_marginBottom="10.0dp"
+        android:background="@drawable/shadow_border_for_start"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="20dp">
 
-            <Button
-                android:id="@+id/rickRollButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rickRollButton"
-                android:textSize="15dp"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:background="@drawable/invisiblebutton"/>
-        </TableLayout>
+        <EditText
+            android:id="@+id/usernameInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:focusable="true"
+            android:hint="@string/usernameInput"
+            android:textColorHighlight="#ff7eff15"
+            android:textColorHint="@color/black" />
+
+        <EditText
+            android:id="@+id/passwordInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/passwordInput"
+            android:inputType="textPassword"
+            android:textColorHint="@color/black" />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="271dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/button_shape"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="@string/loginButton"
+            android:textColor="@color/white"/>
+    </TableLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/rickRollButton"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#D1BBBB"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="@string/rickRollButton"
+            android:textSize="15sp"
+            android:textColor="#951616"/>
+    </RelativeLayout>
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.systemymobilneprojekt.app;
 
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -9,10 +10,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.systemymobilneprojekt.R;
 
@@ -83,13 +86,20 @@ public class ShakeomatActivity extends AppCompatActivity implements SensorEventL
         setTitle("Shakeomat");
         setContentView(R.layout.sensor);
 
+        ConstraintLayout constraintLayout = findViewById(R.id.shakeLayout);
+        AnimationDrawable animationDrawable = (AnimationDrawable) constraintLayout.getBackground();
+        animationDrawable.setEnterFadeDuration(1000);
+        animationDrawable.setExitFadeDuration(2000);
+        animationDrawable.start();
+
         imageView = findViewById(R.id.imageView);
         textView = findViewById(R.id.textView);
-        textView.setBackgroundColor(getRandomColor());
         lastUpdate = System.currentTimeMillis();
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         mySensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+
 
         if (mySensor == null) {
             Toast.makeText(this, "Brak czujnika :(", Toast.LENGTH_LONG).show();
@@ -141,7 +151,7 @@ public class ShakeomatActivity extends AppCompatActivity implements SensorEventL
                 actualTime = System.currentTimeMillis();
                 if ((actualTime - lastUpdate) > 1000) {
                     lastUpdate = actualTime;
-                    textView.setBackgroundColor(getRandomColor());
+                    //textView.setBackgroundColor(getRandomColor());
 
                     Random nr = new Random();
                     WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);

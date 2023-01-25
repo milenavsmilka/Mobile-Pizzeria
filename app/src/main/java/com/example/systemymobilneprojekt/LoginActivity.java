@@ -35,7 +35,7 @@ import java.util.Objects;
 public class LoginActivity extends Activity {
     Button logButton, gotoYTButton;
     EditText userEditText, passwordEditText;
-    ImageView pizzaImageView;
+//    ImageView pizzaImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +47,12 @@ public class LoginActivity extends Activity {
         //DatabaseOperations.addPizzasToDb();
         setContentView(R.layout.login_activity);
 
-        LinearLayout linearLayout = findViewById(R.id.loginLayout);
+//        LinearLayout linearLayout = findViewById(R.id.loginLayout);
 
-        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
-        animationDrawable.setEnterFadeDuration(1000);
-        animationDrawable.setExitFadeDuration(2000);
-        animationDrawable.start();
+//        AnimationDrawable animationDrawable = (AnimationDrawable) linearLayout.getBackground();
+//        animationDrawable.setEnterFadeDuration(1000);
+//        animationDrawable.setExitFadeDuration(2000);
+//        animationDrawable.start();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("Witaj w pizzerii!", "Witaj w pizzerii!", NotificationManager.IMPORTANCE_DEFAULT);
@@ -63,7 +63,7 @@ public class LoginActivity extends Activity {
         userEditText = (EditText) findViewById(R.id.usernameInput);
         passwordEditText = (EditText) findViewById(R.id.passwordInput);
         gotoYTButton = (Button) findViewById(R.id.rickRollButton);
-        pizzaImageView = (ImageView) findViewById(R.id.pizzaImage);
+//        pizzaImageView = (ImageView) findViewById(R.id.pizzaImage);
 
         logButton.setOnClickListener(new View.OnClickListener() {
             @Override

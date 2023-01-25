@@ -125,9 +125,6 @@ public class PizzaListFragment extends Fragment {
             dateTextView.setText(pizza.getDescription());
             priceTextView.setText(pizza.getPrice().toString());
 
-
-
-
             List<String> pizzaImageNames = Arrays.asList("pizza1", "pizza2", "pizza3",
                     "pizza4", "pizza5", "pizza6", "pizza7", "pizza8", "pizza9", "pizza10", "pizza11");
             String pizzaImageName;
